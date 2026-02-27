@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+::selection {
+  background-color: #271577;
+  color: #f3f3f3;
+}
+
+/* For older versions of Firefox, use the vendor prefix */
+::-moz-selection {
+  background-color: #271577;
+  color: #f3f3f3;
+}
