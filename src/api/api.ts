@@ -6,6 +6,18 @@ export interface BannerDoc {
   image: string;
 }
 
+export type BorderTypes =
+  | "none"
+  | "hidden"
+  | "solid"
+  | "dotted"
+  | "dashed"
+  | "double"
+  | "groove"
+  | "ridge"
+  | "inset"
+  | "outset";
+
 export interface GenericComponentsProps {
   padding?: number | string;
   paddingLeft?: number | string;
@@ -19,6 +31,27 @@ export interface GenericComponentsProps {
   marginBottom?: number | string;
   backgroundColor?: string;
   textColor?: string;
+  borderSize?: number | string;
+  borderColor?: string;
+  borderType?: BorderTypes;
+  boxShadowHorizontalOffset?: number | string;
+  boxShadowVerticalOffset?: number | string;
+  boxShadowBlurRadius?: number | string;
+  boxShadowSpreadRadius?: number | string;
+  boxShadowColor?: string;
+  dropShadowOffsetX: number | string;
+  dropShadowOffsetY: number | string;
+  dropShadowBlurRadius: number | string;
+  dropShadowColor?: string;
+  ribbon?: boolean;
+  ribbonText?: string;
+  ribbonColor?: string;
+  ribbonTextColor?: string;
+  ribbonSide?: "left" | "right";
+  ribbonType?: "corner" | "edge";
+  ribbonSize?: "normal" | "large";
+  ribbonWithStripes?: boolean;
+  borderRadius?: number | string;
 }
 
 export interface ColumnDoc extends GenericComponentsProps {
