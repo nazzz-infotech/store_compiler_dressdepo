@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import type { LayoutNode, BannerNode, ColumnNode } from "../api/nodes";
+import type { LayoutNode, BannerNode, ColumnNode, TextNode } from "../api/nodes";
 import { registry } from "../registry/registry";
 
 export function compileNode(node: LayoutNode): JSX.Element {
@@ -19,6 +19,12 @@ export function compileNode(node: LayoutNode): JSX.Element {
     const bannerNode = node as BannerNode;
     const BannerComponent = registry.banner;
     return <BannerComponent {...bannerNode.props} />;
+  }
+
+  if (node.type === "text") {
+    const textNode = node as TextNode;
+    const TextComponent = registry.text;
+    return <TextComponent {...textNode.props} />;
   }
 
   // Exhaustive check

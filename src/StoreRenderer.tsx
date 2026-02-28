@@ -26,7 +26,7 @@ function convertStoreToNodes(store: StoreDoc): LayoutNode[] {
     const columns = Array.isArray(store.column) ? store.column : [store.column];
     columns.forEach((column: ParsedColumnDoc) => {
       // copy all props from parsed column; gap, padding, margin, etc.
-      const { banner, ...rest } = column;
+      const { banner, text, ...rest } = column;
       const columnNode: LayoutNode = {
         type: "column",
         props: rest,
@@ -40,6 +40,16 @@ function convertStoreToNodes(store: StoreDoc): LayoutNode[] {
           columnNode.children?.push({
             type: "banner",
             props: b,
+          });
+        });
+      }
+      
+      if (text) {
+        const texts = Array.isArray(text) ? text : [text];
+        texts.forEach((t) => {
+          columnNode.children?.push({
+            type: "text",
+            props: t,
           });
         });
       }

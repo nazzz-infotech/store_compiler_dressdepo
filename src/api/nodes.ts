@@ -1,4 +1,4 @@
-import type { BannerDoc, ColumnDoc } from "./api";
+import type { BannerDoc, ColumnDoc, TextDoc } from "./api";
 
 export type BannerNode = {
   type: "banner";
@@ -11,4 +11,10 @@ export type ColumnNode = {
   children?: LayoutNode[];
 };
 
-export type LayoutNode = BannerNode | ColumnNode;
+export type TextNode = {
+  type: "text";
+  props: TextDoc;
+  children?: LayoutNode[];
+};
+
+export type LayoutNode = BannerNode | ColumnNode | TextNode;

@@ -1,5 +1,7 @@
 // api/api.ts
 
+import { type TypographyVariant } from "@mui/material";
+
 export interface BannerDoc {
   title: string;
   subtitle?: string;
@@ -34,14 +36,26 @@ export interface GenericComponentsProps {
   borderSize?: number | string;
   borderColor?: string;
   borderType?: BorderTypes;
+  borderLeftSize?: number | string;
+  borderLeftColor?: string;
+  borderLeftType?: BorderTypes;
+  borderRightSize?: number | string;
+  borderRightColor?: string;
+  borderRightType?: BorderTypes;
+  borderTopSize?: number | string;
+  borderTopColor?: string;
+  borderTopType?: BorderTypes;
+  borderBottomSize?: number | string;
+  borderBottomColor?: string;
+  borderBottomType?: BorderTypes;
   boxShadowHorizontalOffset?: number | string;
   boxShadowVerticalOffset?: number | string;
   boxShadowBlurRadius?: number | string;
   boxShadowSpreadRadius?: number | string;
   boxShadowColor?: string;
-  dropShadowOffsetX: number | string;
-  dropShadowOffsetY: number | string;
-  dropShadowBlurRadius: number | string;
+  dropShadowOffsetX?: number | string;
+  dropShadowOffsetY?: number | string;
+  dropShadowBlurRadius?: number | string;
   dropShadowColor?: string;
   ribbon?: boolean;
   ribbonText?: string;
@@ -52,15 +66,22 @@ export interface GenericComponentsProps {
   ribbonSize?: "normal" | "large";
   ribbonWithStripes?: boolean;
   borderRadius?: number | string;
+  zIndex?: number | string;
 }
 
 export interface ColumnDoc extends GenericComponentsProps {
   gap?: number | string;
 }
 
-// Extended column interface for parsed XML that may contain banner children
+export interface TextDoc extends GenericComponentsProps {
+  text: string;
+  type: TypographyVariant;
+}
+
+// Extended column interface for parsed XML that may contain banner and text children
 export interface ParsedColumnDoc extends ColumnDoc {
   banner?: BannerDoc | BannerDoc[];
+  text?: TextDoc | TextDoc[];
 }
 
 // This represents the raw parsed XML structure

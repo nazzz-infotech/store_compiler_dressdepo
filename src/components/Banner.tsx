@@ -9,10 +9,18 @@ export function Banner({ image, title, subtitle }: BannerDoc) {
         alt={"Banner Image"}
         className="w-full h-full object-cover"
       />
-      <Typography variant="h4" className="absolute bottom-4 left-4 text-white drop-shadow-sm drop-shadow-black font-bold">
+      <Typography
+        variant="h4"
+        className="absolute bottom-9.5 left-4 text-white drop-shadow-sm drop-shadow-black font-bold"
+      >
         {title}
       </Typography>
-      <h4>{subtitle}</h4>
+      <Typography
+        variant="body1"
+        className="absolute bottom-3.25 left-4 text-white! drop-shadow-sm drop-shadow-black"
+      >
+        {subtitle}
+      </Typography>
     </div>
   );
 }

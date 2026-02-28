@@ -2,12 +2,17 @@ import "./App.css";
 import { StoreRenderer } from "./StoreRenderer";
 
 const xml = `
+<?xml version="1.1" encoding="UTF-8"?>
 <store>
-  <banner image="https://picsum.photos/1200/400" title="Dress Depo" subtitle="Premium Fashion" />
-  <banner image="https://picsum.photos/1200/400" title="Summer Sale" subtitle="Up to 50% OFF" />
-  <column gap="18" paddingBottom="40" borderSize="2" borderType="ridge" borderColor="#000080" boxShadowHorizontalOffset="0.5" boxShadowVerticalOffset="0.75" boxShadowBlurRadius="1" boxShadowColor="#cccccc" boxShadowSpreadRadius="1.5" borderRadius="5">
-    <banner image="https://picsum.photos/1200/400" title="Winter Sale" subtitle="Up to 50% OFF" />
-    <banner image="https://picsum.photos/1200/400" title="Winter Sale" subtitle="Up to 50% OFF" />
+  <banner
+    image="https://storage.googleapis.com/dressdepo_storage_bucket/sellers/assets/default/default_store_banner.png"
+    title="Hi, 3z Fashions"
+    subtitle="here's is your new store, let it customize !"
+  />
+  <column gap="2" backgroundColor="#eceff1" padding="5.5" borderRadius="0.5" borderSize="2.5"
+    borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹" ribbonType="corner"
+    ribbonColor="#2e7d32" ribbonTextColor="#ffffff">
+    <text text="hello !!!" type="h5" />
   </column>
 </store>
 `;

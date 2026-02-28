@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { toRem, type ColumnDoc } from "../api/api";
+import { Ribbon } from "react-ribbons";
 
 interface Props extends ColumnDoc {
   children?: ReactNode;
@@ -29,19 +30,34 @@ function Column({
   dropShadowOffsetY = 0,
   dropShadowBlurRadius = 0,
   dropShadowColor = "#000000",
-  borderColor = "#00000",
+  borderColor = "#000000",
   borderSize = 0,
   borderType = "solid",
+  borderLeftColor = "#000000",
+  borderLeftSize = 0,
+  borderLeftType = "solid",
+  borderRightColor = "#000000",
+  borderRightSize = 0,
+  borderRightType = "solid",
+  borderTopColor = "#000000",
+  borderTopSize = 0,
+  borderTopType = "solid",
+  borderBottomColor = "#000000",
+  borderBottomSize = 0,
+  borderBottomType = "solid",
+  zIndex = 0,
   ribbon = false,
-  ribbonColor = "#FF0000",
+  ribbonColor = "#388e3c",
   ribbonSide = "left",
-  ribbonSize = 0,
+  ribbonSize = "normal",
   ribbonText = "",
-  ribbonTextColor = "#000000",
+  ribbonTextColor = "#ffffff",
   ribbonType = "corner",
   ribbonWithStripes = true,
   borderRadius = 0,
 }: Props) {
+  const hasMainBorder = Number(borderSize) > 0;
+
   const style: React.CSSProperties = {
     gap: toRem(gap),
     padding: toRem(padding),
@@ -56,17 +72,62 @@ function Column({
     marginTop: toRem(marginTop),
     backgroundColor,
     color: textColor,
-    border: `${toRem(borderSize)} ${borderType} ${borderColor}`,
-    boxShadow: `${toRem(boxShadowHorizontalOffset)} ${toRem(boxShadowVerticalOffset)} ${toRem(boxShadowBlurRadius)} ${toRem(boxShadowSpreadRadius)} ${boxShadowColor}`,
+
+    // 1 Apply main border first (fallback)
+    ...(hasMainBorder && {
+      border: `${toRem(borderSize)} ${borderType} ${borderColor}`,
+    }),
+
+    // 2 Override individual sides only if provided
+    ...(Number(borderLeftSize) > 0 && {
+      borderLeft: `${toRem(borderLeftSize)} ${borderLeftType} ${borderLeftColor}`,
+    }),
+
+    ...(Number(borderRightSize) > 0 && {
+      borderRight: `${toRem(borderRightSize)} ${borderRightType} ${borderRightColor}`,
+    }),
+
+    ...(Number(borderTopSize) > 0 && {
+      borderTop: `${toRem(borderTopSize)} ${borderTopType} ${borderTopColor}`,
+    }),
+
+    ...(Number(borderBottomSize) > 0 && {
+      borderBottom: `${toRem(borderBottomSize)} ${borderBottomType} ${borderBottomColor}`,
+    }),
+
+    boxShadow: `${toRem(boxShadowHorizontalOffset)} ${toRem(
+      boxShadowVerticalOffset,
+    )} ${toRem(boxShadowBlurRadius)} ${toRem(boxShadowSpreadRadius)} ${boxShadowColor}`,
+
     filter: `drop-shadow(${toRem(dropShadowOffsetX)} ${toRem(
       dropShadowOffsetY,
     )} ${toRem(dropShadowBlurRadius)} ${dropShadowColor})`,
+
     borderRadius: toRem(borderRadius),
+    zIndex: Number(zIndex) + 10,
   };
 
   return (
-    <div className={`flex flex-col`} style={style}>
-      {children}
+    <div className="relative">
+      {ribbon && (
+        <div className="absolute top-0 left-0 z-50">
+          <Ribbon
+            side={ribbonSide}
+            type={ribbonType}
+            size={ribbonSize}
+            backgroundColor={ribbonColor}
+            color={ribbonTextColor}
+            fontFamily="arial"
+            withStripes={ribbonWithStripes}
+          >
+            {ribbonText}
+          </Ribbon>
+        </div>
+      )}
+
+      <div className="flex flex-col relative z-10" style={style}>
+        {children}
+      </div>
     </div>
   );
 }
