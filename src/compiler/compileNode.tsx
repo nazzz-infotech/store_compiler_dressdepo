@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import type { LayoutNode, BannerNode, ColumnNode, TextNode } from "../api/nodes";
+import type { LayoutNode, BannerNode, ColumnNode, TextNode, RowNode } from "../api/nodes";
 import { registry } from "../registry/registry";
 
 export function compileNode(node: LayoutNode): JSX.Element {
@@ -12,6 +12,18 @@ export function compileNode(node: LayoutNode): JSX.Element {
           <div key={index}>{compileNode(child)}</div>
         ))}
       </ColumnComponent>
+    );
+  }
+
+   if (node.type === "row") {
+    const rowNode = node as RowNode;
+    const RowComponent = registry.row;
+    return (
+      <RowComponent {...rowNode.props}>
+        {rowNode.children?.map((child, index) => (
+          <div key={index}>{compileNode(child)}</div>
+        ))}
+      </RowComponent>
     );
   }
 

@@ -67,9 +67,14 @@ export interface GenericComponentsProps {
   ribbonWithStripes?: boolean;
   borderRadius?: number | string;
   zIndex?: number | string;
+  flexWarp?: boolean | string;
 }
 
 export interface ColumnDoc extends GenericComponentsProps {
+  gap?: number | string;
+}
+
+export interface RowDoc extends GenericComponentsProps {
   gap?: number | string;
 }
 
@@ -79,15 +84,25 @@ export interface TextDoc extends GenericComponentsProps {
 }
 
 // Extended column interface for parsed XML that may contain banner and text children
+// Extended column/row interfaces for parsed XML that may contain children
 export interface ParsedColumnDoc extends ColumnDoc {
   banner?: BannerDoc | BannerDoc[];
   text?: TextDoc | TextDoc[];
+  row?: ParsedRowDoc | ParsedRowDoc[];
+}
+
+export interface ParsedRowDoc extends RowDoc {
+  banner?: BannerDoc | BannerDoc[];
+  text?: TextDoc | TextDoc[];
+  column?: ParsedColumnDoc | ParsedColumnDoc[];
+  row?: ParsedRowDoc | ParsedRowDoc[];
 }
 
 // This represents the raw parsed XML structure
 export interface StoreDoc {
   banner?: BannerDoc | BannerDoc[];
   column?: ParsedColumnDoc | ParsedColumnDoc[];
+  row?: ParsedRowDoc | ParsedRowDoc[];
 }
 
 export function toRem(value?: number | string) {

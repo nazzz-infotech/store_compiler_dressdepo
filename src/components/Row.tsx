@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
-import { toRem, type ColumnDoc } from "../api/api";
+import { toRem, type RowDoc } from "../api/api";
 import { Ribbon } from "react-ribbons";
 
-interface Props extends ColumnDoc {
+interface Props extends RowDoc {
   children?: ReactNode;
 }
 
-function Column({
+function Row({
   gap = 0,
   children,
   padding = 0,
@@ -106,7 +106,7 @@ function Column({
 
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
-    flexWrap: flexWarp === "true" ? "wrap" : "unset",
+    flexWrap: flexWarp ? "wrap" : "unset",
   };
 
   return (
@@ -127,11 +127,11 @@ function Column({
         </div>
       )}
 
-      <div className="flex flex-col relative z-10" style={style}>
+      <div className="flex flex-row relative z-10" style={style}>
         {children}
       </div>
     </div>
   );
 }
 
-export default Column;
+export default Row;

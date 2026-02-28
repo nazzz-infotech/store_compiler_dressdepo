@@ -9,11 +9,22 @@ const xml = `
     title="Hi, 3z Fashions"
     subtitle="here's is your new store, let it customize !"
   />
-  <column gap="2" backgroundColor="#eceff1" padding="5.5" borderRadius="0.5" borderSize="2.5"
+  <row gap="5" backgroundColor="#eceff1" padding="6" borderRadius="0.5" borderSize="2.5"
     borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹" ribbonType="corner"
-    ribbonColor="#2e7d32" ribbonTextColor="#ffffff">
+    ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWarp="false">
     <text text="hello !!!" type="h5" />
-  </column>
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+    <text text="hello !!!" type="h5" />
+  </row>
 </store>
 `;
 
