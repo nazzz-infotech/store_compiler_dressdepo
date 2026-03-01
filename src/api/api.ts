@@ -50,7 +50,84 @@ export interface StoreDoc {
   rectangle: RectangleDoc | RectangleDoc[];
 }
 
+export type JustifyContent =
+  | "flex-start"
+  | "flex-end"
+  | "center"
+  | "space-between"
+  | "space-around"
+  | "space-evenly"
+  | "start"
+  | "end"
+  | "left"
+  | "right"
+  | "normal"
+  | "stretch";
+
+export type AlignItems =
+  | "stretch"
+  | "flex-start"
+  | "flex-end"
+  | "center"
+  | "baseline"
+  | "start"
+  | "end"
+  | "self-start"
+  | "self-end"
+  | "normal";
+
+export interface GenericStyleDoc {
+  padding?: number | string;
+  paddingLeft?: number | string;
+  paddingRight?: number | string;
+  paddingTop?: number | string;
+  paddingBottom?: number | string;
+  margin?: number | string;
+  marginLeft?: number | string;
+  marginRight?: number | string;
+  marginTop?: number | string;
+  marginBottom?: number | string;
+  backgroundColor?: string;
+  textColor?: string;
+  boxShadowHorizontalOffset?: number | string;
+  boxShadowVerticalOffset?: number | string;
+  boxShadowBlurRadius?: number | string;
+  boxShadowSpreadRadius?: number | string;
+  boxShadowColor?: string;
+  dropShadowOffsetX?: number | string;
+  dropShadowOffsetY?: number | string;
+  dropShadowBlurRadius?: number | string;
+  dropShadowColor?: string;
+  borderColor?: string;
+  borderSize?: number | string;
+  borderType?: string;
+  borderLeftColor?: string;
+  borderLeftSize?: number | string;
+  borderLeftType?: string;
+  borderRightColor?: string;
+  borderRightSize?: number | string;
+  borderRightType?: string;
+  borderTopColor?: string;
+  borderTopSize?: number | string;
+  borderTopType?: string;
+  borderBottomColor?: string;
+  borderBottomSize?: number | string;
+  borderBottomType?: string;
+  zIndex?: number | string;
+  ribbon?: boolean;
+  ribbonText?: string;
+  ribbonColor?: string;
+  ribbonTextColor?: string;
+  ribbonSide?: "left" | "right";
+  ribbonType?: "corner" | "edge";
+  ribbonSize?: "normal" | "large";
+  ribbonWithStripes?: boolean;
+  borderRadius?: number | string;
+  flexWrap?: boolean | string;
+  alignItems?: AlignItems;
+  justifyContent?: JustifyContent;
+}
+
 // re-export the helper from utils so callers can continue importing
 // from `api` without changing their imports.
 export { toRem } from "../utils/style";
-

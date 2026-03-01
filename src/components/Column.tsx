@@ -1,57 +1,10 @@
 import type { ReactNode } from "react";
 import { toRem } from "../utils/style";
 import { Ribbon } from "react-ribbons";
+import type { GenericStyleDoc } from "../api/api";
 
-// props defined and exported for use elsewhere
-export interface ColumnDoc {
+export interface ColumnDoc extends GenericStyleDoc {
   gap?: number | string;
-  padding?: number | string;
-  paddingLeft?: number | string;
-  paddingRight?: number | string;
-  paddingTop?: number | string;
-  paddingBottom?: number | string;
-  margin?: number | string;
-  marginLeft?: number | string;
-  marginRight?: number | string;
-  marginTop?: number | string;
-  marginBottom?: number | string;
-  backgroundColor?: string;
-  textColor?: string;
-  boxShadowHorizontalOffset?: number | string;
-  boxShadowVerticalOffset?: number | string;
-  boxShadowBlurRadius?: number | string;
-  boxShadowSpreadRadius?: number | string;
-  boxShadowColor?: string;
-  dropShadowOffsetX?: number | string;
-  dropShadowOffsetY?: number | string;
-  dropShadowBlurRadius?: number | string;
-  dropShadowColor?: string;
-  borderColor?: string;
-  borderSize?: number | string;
-  borderType?: string;
-  borderLeftColor?: string;
-  borderLeftSize?: number | string;
-  borderLeftType?: string;
-  borderRightColor?: string;
-  borderRightSize?: number | string;
-  borderRightType?: string;
-  borderTopColor?: string;
-  borderTopSize?: number | string;
-  borderTopType?: string;
-  borderBottomColor?: string;
-  borderBottomSize?: number | string;
-  borderBottomType?: string;
-  zIndex?: number | string;
-  ribbon?: boolean;
-  ribbonText?: string;
-  ribbonColor?: string;
-  ribbonTextColor?: string;
-  ribbonSide?: "left" | "right";
-  ribbonType?: "corner" | "edge";
-  ribbonSize?: "normal" | "large";
-  ribbonWithStripes?: boolean;
-  borderRadius?: number | string;
-  flexWrap?: boolean | string;
 }
 
 interface Props extends ColumnDoc {
@@ -108,6 +61,8 @@ function Column({
   ribbonWithStripes = true,
   borderRadius = 0,
   flexWrap = false,
+  alignItems = "stretch",
+  justifyContent = "flex-start",
 }: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -159,6 +114,8 @@ function Column({
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
+    alignItems: alignItems,
+    justifyItems: justifyContent,
   };
 
   return (
