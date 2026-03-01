@@ -1,26 +1,9 @@
-import type { BannerDoc, ColumnDoc, TextDoc, RowDoc } from "./api";
+// this file exists only for compatibility; the real definition lives in
+// `registry/registry.ts` so that new components don’t require touching
+// several different places.  Export whatever the registry exports so that
+// other code (including tests or external consumers) can keep importing from
+// `./api/nodes` if they prefer.
 
-export type BannerNode = {
-  type: "banner";
-  props: BannerDoc;
-};
+import type { LayoutNode as RegistryLayoutNode } from "../registry/registry";
 
-export type ColumnNode = {
-  type: "column";
-  props: ColumnDoc;
-  children?: LayoutNode[];
-};
-
-export type RowNode = {
-  type: "row";
-  props: RowDoc;
-  children?: LayoutNode[];
-};
-
-export type TextNode = {
-  type: "text";
-  props: TextDoc;
-  children?: LayoutNode[];
-};
-
-export type LayoutNode = BannerNode | ColumnNode | RowNode | TextNode;
+export type LayoutNode = RegistryLayoutNode;

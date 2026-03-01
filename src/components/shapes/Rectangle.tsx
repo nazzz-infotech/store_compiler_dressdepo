@@ -1,10 +1,8 @@
-import type { ReactNode } from "react";
-import { toRem } from "../utils/style";
 import { Ribbon } from "react-ribbons";
+import { toRem } from "../../utils/style";
 
-// props defined locally and exported for reuse
-export interface RowDoc {
-  gap?: number | string;
+// props defined in component so registry/api can import without cycle
+export interface RectangleDoc {
   padding?: number | string;
   paddingLeft?: number | string;
   paddingRight?: number | string;
@@ -52,17 +50,11 @@ export interface RowDoc {
   ribbonWithStripes?: boolean;
   borderRadius?: number | string;
   flexWrap?: boolean | string;
-  alignItems?: string;
-  justifyContent?: string;
+  height?: number;
+  width?: number;
 }
 
-interface Props extends RowDoc {
-  children?: ReactNode;
-}
-
-function Row({
-  gap = 0,
-  children,
+function Rectangle({
   padding = 0,
   paddingBottom = 0,
   paddingLeft = 0,
@@ -110,13 +102,14 @@ function Row({
   ribbonWithStripes = true,
   borderRadius = 0,
   flexWrap = false,
-  alignItems = "stretch",
-  justifyContent = "flex-start",
-}: Props) {
+  height = 16,
+  width = 16,
+}: RectangleDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
   const style: React.CSSProperties = {
-    gap: toRem(gap),
+    height: toRem(height),
+    width: toRem(width),
     padding: toRem(padding),
     paddingBottom: toRem(paddingBottom),
     paddingLeft: toRem(paddingLeft),
@@ -162,10 +155,7 @@ function Row({
 
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
-    // treat string/boolean values the same way; only 'true' enables wrapping
-    flexWrap: flexWrap === true || flexWrap === "true" ? "wrap" : "unset",
-    alignItems: alignItems,
-    justifyItems: justifyContent,
+    flexWrap: flexWrap === "true" ? "wrap" : "unset",
   };
 
   return (
@@ -185,12 +175,9 @@ function Row({
           </Ribbon>
         </div>
       )}
-
-      <div className="flex flex-row relative z-10 justify-center" style={style}>
-        {children}
-      </div>
+      <div className="relative z-10" style={style} />
     </div>
   );
 }
 
-export default Row;
+export default Rectangle;

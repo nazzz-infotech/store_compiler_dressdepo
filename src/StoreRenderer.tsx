@@ -1,129 +1,82 @@
+import React from "react";
 import { parseXml } from "./parser/parseXml";
 import { compileNode } from "./compiler/compileNode";
-import type { StoreDoc, ParsedColumnDoc, ParsedRowDoc, BannerDoc, TextDoc, ColumnDoc, RowDoc } from "./api/api";
-import type { LayoutNode, BannerNode, TextNode, ColumnNode, RowNode } from "./api/nodes";
+import { registry } from "./registry/registry";
+import type { LayoutNode } from "./registry/registry";
 
-type Props = {
+// opaque shape for parsed XML objects; they may contain strings or nested
+// objects/arrays but not functions, so Record<string, unknown> is a decent fit.
+type XmlObject = Record<string, unknown>;
+
+// Props for the renderer
+interface Props {
   xml: string;
-};
+}
 
-function convertStoreToNodes(store: StoreDoc): LayoutNode[] {
+function convertParsedToNode(parsed: XmlObject, type: keyof typeof registry): LayoutNode {
+  const children: LayoutNode[] = [];
+
+  // recursively turn registered child elements into nodes
+  Object.entries(parsed).forEach(([key, value]) => {
+    if (key === "#text") return; // ignore parser text nodes
+    if (key in registry) {
+      const compKey = key as keyof typeof registry;
+      const items = Array.isArray(value) ? value : [value];
+      items.forEach(item => {
+        if (typeof item === "object" && item !== null) {
+          children.push(convertParsedToNode(item as XmlObject, compKey));
+        }
+      });
+    }
+  });
+
+  // props are everything except recognized children keys
+  const props: XmlObject = { ...parsed };
+  (Object.keys(registry) as Array<keyof typeof registry>).forEach(childKey => {
+    if (props[childKey] !== undefined) {
+      delete props[childKey];
+    }
+  });
+
+  return { type, props: props as LayoutNode["props"], children: children.length ? children : undefined };
+}
+
+function convertStoreToNodes(store: XmlObject): LayoutNode[] {
   const nodes: LayoutNode[] = [];
 
-  // Handle banner elements
-  if (store.banner) {
-    const banners = Array.isArray(store.banner) ? store.banner : [store.banner];
-    banners.forEach((banner: BannerDoc) => {
-      const bannerNode: BannerNode = {
-        type: "banner",
-        props: banner,
-      };
-      nodes.push(bannerNode);
+  Object.entries(store).forEach(([key, value]) => {
+    if (key === "#text") return;
+    if (!(key in registry)) return;
+    const compKey = key as keyof typeof registry;
+    const items = Array.isArray(value) ? value : [value];
+    items.forEach(item => {
+      if (typeof item === "object" && item !== null) {
+        nodes.push(convertParsedToNode(item as XmlObject, compKey));
+      }
     });
-  }
-
-  // Handle row elements at top-level
-  if (store.row) {
-    const rows = Array.isArray(store.row) ? store.row : [store.row];
-    rows.forEach((r: ParsedRowDoc) => {
-      nodes.push(convertParsedToNode(r, "row"));
-    });
-  }
-
-  // Handle column elements
-  if (store.column) {
-    const columns = Array.isArray(store.column) ? store.column : [store.column];
-    columns.forEach((column: ParsedColumnDoc) => {
-      nodes.push(convertParsedToNode(column, "column"));
-    });
-  }
+  });
 
   return nodes;
 }
 
-function convertParsedToNode(
-  parsed: ParsedColumnDoc | ParsedRowDoc,
-  type: "column" | "row",
-): LayoutNode {
-  // Extract child elements and base props
-  const {
-    banner: bannerChildren,
-    text: textChildren,
-    column: columnChildren,
-    row: rowChildren,
-    ...baseProps
-  } = parsed as ParsedColumnDoc & ParsedRowDoc;
-
-  // Create the base node with proper typing
-  const node: ColumnNode | RowNode =
-    type === "column"
-      ? {
-          type: "column",
-          props: baseProps as ColumnDoc,
-          children: [],
-        }
-      : {
-          type: "row",
-          props: baseProps as RowDoc,
-          children: [],
-        };
-
-  // Handle banner children
-  if (bannerChildren) {
-    const banners = Array.isArray(bannerChildren) ? bannerChildren : [bannerChildren];
-    banners.forEach((banner: BannerDoc) => {
-      const bannerNode: BannerNode = {
-        type: "banner",
-        props: banner,
-      };
-      (node.children ||= []).push(bannerNode);
-    });
-  }
-
-  // Handle text children
-  if (textChildren) {
-    const texts = Array.isArray(textChildren) ? textChildren : [textChildren];
-    texts.forEach((text: TextDoc) => {
-      const textNode: TextNode = {
-        type: "text",
-        props: text,
-      };
-      (node.children ||= []).push(textNode);
-    });
-  }
-
-  // Handle nested column children
-  if (columnChildren) {
-    const columns = Array.isArray(columnChildren) ? columnChildren : [columnChildren];
-    columns.forEach((column: ParsedColumnDoc) => {
-      (node.children ||= []).push(convertParsedToNode(column, "column"));
-    });
-  }
-
-  // Handle nested row children
-  if (rowChildren) {
-    const rows = Array.isArray(rowChildren) ? rowChildren : [rowChildren];
-    rows.forEach((row: ParsedRowDoc) => {
-      (node.children ||= []).push(convertParsedToNode(row, "row"));
-    });
-  }
-
-  return node;
-}
-
 export function StoreRenderer({ xml }: Props) {
-  const parsed = parseXml(xml) as { store?: StoreDoc };
-
-  if (!parsed.store) {
+  const parsedUnknown = parseXml(xml);
+  if (typeof parsedUnknown !== "object" || parsedUnknown === null) {
     return null;
   }
 
-  const nodes = convertStoreToNodes(parsed.store);
+  const parsed = parsedUnknown as XmlObject;
+  const store = parsed.store;
+  if (typeof store !== "object" || store === null) {
+    return null;
+  }
+
+  const nodes = convertStoreToNodes(store as XmlObject);
 
   return (
     <>
       {nodes.map((node, index) => (
-        <div key={index}>{compileNode(node)}</div>
+        <React.Fragment key={index}>{compileNode(node)}</React.Fragment>
       ))}
     </>
   );

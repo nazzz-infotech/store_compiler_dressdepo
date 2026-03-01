@@ -1,45 +1,35 @@
 import type { JSX } from "react";
-import type { LayoutNode, BannerNode, ColumnNode, TextNode, RowNode } from "../api/nodes";
+import type { LayoutNode, ComponentProps, Registry } from "../registry/registry";
 import { registry } from "../registry/registry";
+import React from "react";
+
+// runtime type guard used to narrow a LayoutNode to the specific variant
+// corresponding to a registry key.  This enables the compiler to know that
+// `node.props` matches `ComponentProps[K]` below.
+function isNodeOfType<K extends keyof Registry>(
+  node: LayoutNode,
+  type: K,
+): node is LayoutNode<K> {
+  return node.type === type;
+}
 
 export function compileNode(node: LayoutNode): JSX.Element {
-  if (node.type === "column") {
-    const columnNode = node as ColumnNode;
-    const ColumnComponent = registry.column;
-    return (
-      <ColumnComponent {...columnNode.props}>
-        {columnNode.children?.map((child, index) => (
-          <div key={index}>{compileNode(child)}</div>
-        ))}
-      </ColumnComponent>
-    );
+  // iterate through the keys in the registry rather than using a generic
+  // lookup; each iteration narrows the node type for the compiler.
+  for (const key of Object.keys(registry) as Array<keyof Registry>) {
+    if (isNodeOfType(node, key)) {
+      const Component: React.ComponentType<ComponentProps[typeof key]> =
+        registry[key] as React.ComponentType<ComponentProps[typeof key]>;
+      return (
+        <Component {...node.props}>
+          {node.children?.map((child, index) => (
+            <React.Fragment key={index}>{compileNode(child)}</React.Fragment>
+          ))}
+        </Component>
+      );
+    }
   }
 
-   if (node.type === "row") {
-    const rowNode = node as RowNode;
-    const RowComponent = registry.row;
-    return (
-      <RowComponent {...rowNode.props}>
-        {rowNode.children?.map((child, index) => (
-          <div key={index}>{compileNode(child)}</div>
-        ))}
-      </RowComponent>
-    );
-  }
-
-  if (node.type === "banner") {
-    const bannerNode = node as BannerNode;
-    const BannerComponent = registry.banner;
-    return <BannerComponent {...bannerNode.props} />;
-  }
-
-  if (node.type === "text") {
-    const textNode = node as TextNode;
-    const TextComponent = registry.text;
-    return <TextComponent {...textNode.props} />;
-  }
-
-  // Exhaustive check
-  const _exhaustive: never = node;
-  return _exhaustive;
+  // if we reach here the node type wasn't in the registry (shouldn't happen)
+  throw new Error(`no component registered for type "${node.type}"`);
 }

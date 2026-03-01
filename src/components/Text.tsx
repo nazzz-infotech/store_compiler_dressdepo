@@ -1,5 +1,12 @@
 import { Typography } from "@mui/material";
-import type { TextDoc } from "../api/api";
+// the only props this component needs
+import type { TypographyVariant } from "@mui/material";
+
+export interface TextDoc {
+  text?: string;
+  type?: TypographyVariant;
+  textColor?: string;
+}
 
 function Text({
   text = "",

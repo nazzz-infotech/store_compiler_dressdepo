@@ -1,5 +1,10 @@
-import type { BannerDoc } from "../api/api";
 import { Typography } from "@mui/material";
+
+export interface BannerDoc {
+  image: string;
+  title: string;
+  subtitle?: string;
+}
 
 export function Banner({ image, title, subtitle }: BannerDoc) {
   return (

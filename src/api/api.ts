@@ -1,94 +1,38 @@
-// api/api.ts
+// the API file now delegates most of its type definitions to the
+// `ComponentProps` helper exported by the registry.  When a new component is
+// added to the registry its props type automatically becomes available here;
+// there’s no need to touch this file again unless you want to define helper
+// types such as `Parsed*` or the `toRem` utility.
 
-import { type TypographyVariant } from "@mui/material";
+// Import each component’s exported props type directly.  This avoids
+// circular references between api ↔ registry ↔ components.
+import type { BannerDoc as BannerProps } from "../components/Banner";
+import type { ColumnDoc as ColumnProps } from "../components/Column";
+import type { RowDoc as RowProps } from "../components/Row";
+import type { TextDoc as TextProps } from "../components/Text";
+import type { RectangleDoc as RectangleProps } from "../components/shapes/Rectangle";
 
-export interface BannerDoc {
-  title: string;
-  subtitle?: string;
-  image: string;
-}
+// prop aliases that mirror the previous names so that other modules can still
+// import `BannerDoc`, `ColumnDoc`, etc. (public API remains stable).  These
+// are simply re‑exports of the original component types.
+export type BannerDoc = BannerProps;
+export type ColumnDoc = ColumnProps; // used for columns/rows
+export type RowDoc = RowProps; // used for columns/rows
+export type TextDoc = TextProps;
+export type RectangleDoc = RectangleProps;
 
-export type BorderTypes =
-  | "none"
-  | "hidden"
-  | "solid"
-  | "dotted"
-  | "dashed"
-  | "double"
-  | "groove"
-  | "ridge"
-  | "inset"
-  | "outset";
+// (We no longer re-export ComponentProps; if someone needs the full map they
+// can import from registry directly.)
 
-export interface GenericComponentsProps {
-  padding?: number | string;
-  paddingLeft?: number | string;
-  paddingRight?: number | string;
-  paddingTop?: number | string;
-  paddingBottom?: number | string;
-  margin?: number | string;
-  marginLeft?: number | string;
-  marginRight?: number | string;
-  marginTop?: number | string;
-  marginBottom?: number | string;
-  backgroundColor?: string;
-  textColor?: string;
-  borderSize?: number | string;
-  borderColor?: string;
-  borderType?: BorderTypes;
-  borderLeftSize?: number | string;
-  borderLeftColor?: string;
-  borderLeftType?: BorderTypes;
-  borderRightSize?: number | string;
-  borderRightColor?: string;
-  borderRightType?: BorderTypes;
-  borderTopSize?: number | string;
-  borderTopColor?: string;
-  borderTopType?: BorderTypes;
-  borderBottomSize?: number | string;
-  borderBottomColor?: string;
-  borderBottomType?: BorderTypes;
-  boxShadowHorizontalOffset?: number | string;
-  boxShadowVerticalOffset?: number | string;
-  boxShadowBlurRadius?: number | string;
-  boxShadowSpreadRadius?: number | string;
-  boxShadowColor?: string;
-  dropShadowOffsetX?: number | string;
-  dropShadowOffsetY?: number | string;
-  dropShadowBlurRadius?: number | string;
-  dropShadowColor?: string;
-  ribbon?: boolean;
-  ribbonText?: string;
-  ribbonColor?: string;
-  ribbonTextColor?: string;
-  ribbonSide?: "left" | "right";
-  ribbonType?: "corner" | "edge";
-  ribbonSize?: "normal" | "large";
-  ribbonWithStripes?: boolean;
-  borderRadius?: number | string;
-  zIndex?: number | string;
-  flexWarp?: boolean | string;
-}
+// the rest of this file is basically unchanged; you could remove it entirely
+// if it’s only consumed by the compiler, but keeping the parsing helpers makes
+// the transition incremental.
 
-export interface ColumnDoc extends GenericComponentsProps {
-  gap?: number | string;
-}
-
-export interface RowDoc extends GenericComponentsProps {
-  gap?: number | string;
-}
-
-export interface TextDoc extends GenericComponentsProps {
-  text: string;
-  type: TypographyVariant;
-}
-
-// Extended column interface for parsed XML that may contain banner and text children
-// Extended column/row interfaces for parsed XML that may contain children
 export interface ParsedColumnDoc extends ColumnDoc {
   banner?: BannerDoc | BannerDoc[];
   text?: TextDoc | TextDoc[];
   row?: ParsedRowDoc | ParsedRowDoc[];
+  rectangle?: RectangleDoc | RectangleDoc[];
 }
 
 export interface ParsedRowDoc extends RowDoc {
@@ -96,18 +40,17 @@ export interface ParsedRowDoc extends RowDoc {
   text?: TextDoc | TextDoc[];
   column?: ParsedColumnDoc | ParsedColumnDoc[];
   row?: ParsedRowDoc | ParsedRowDoc[];
+  rectangle?: RectangleDoc | RectangleDoc[];
 }
 
-// This represents the raw parsed XML structure
 export interface StoreDoc {
   banner?: BannerDoc | BannerDoc[];
   column?: ParsedColumnDoc | ParsedColumnDoc[];
   row?: ParsedRowDoc | ParsedRowDoc[];
+  rectangle: RectangleDoc | RectangleDoc[];
 }
 
-export function toRem(value?: number | string) {
-  if (value === undefined || value === null) return undefined;
-  const num = typeof value === "string" ? parseInt(value, 10) : value;
-  if (isNaN(num)) return undefined;
-  return `${num * 0.25}rem`;
-}
+// re-export the helper from utils so callers can continue importing
+// from `api` without changing their imports.
+export { toRem } from "../utils/style";
+

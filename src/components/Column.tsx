@@ -1,6 +1,58 @@
 import type { ReactNode } from "react";
-import { toRem, type ColumnDoc } from "../api/api";
+import { toRem } from "../utils/style";
 import { Ribbon } from "react-ribbons";
+
+// props defined and exported for use elsewhere
+export interface ColumnDoc {
+  gap?: number | string;
+  padding?: number | string;
+  paddingLeft?: number | string;
+  paddingRight?: number | string;
+  paddingTop?: number | string;
+  paddingBottom?: number | string;
+  margin?: number | string;
+  marginLeft?: number | string;
+  marginRight?: number | string;
+  marginTop?: number | string;
+  marginBottom?: number | string;
+  backgroundColor?: string;
+  textColor?: string;
+  boxShadowHorizontalOffset?: number | string;
+  boxShadowVerticalOffset?: number | string;
+  boxShadowBlurRadius?: number | string;
+  boxShadowSpreadRadius?: number | string;
+  boxShadowColor?: string;
+  dropShadowOffsetX?: number | string;
+  dropShadowOffsetY?: number | string;
+  dropShadowBlurRadius?: number | string;
+  dropShadowColor?: string;
+  borderColor?: string;
+  borderSize?: number | string;
+  borderType?: string;
+  borderLeftColor?: string;
+  borderLeftSize?: number | string;
+  borderLeftType?: string;
+  borderRightColor?: string;
+  borderRightSize?: number | string;
+  borderRightType?: string;
+  borderTopColor?: string;
+  borderTopSize?: number | string;
+  borderTopType?: string;
+  borderBottomColor?: string;
+  borderBottomSize?: number | string;
+  borderBottomType?: string;
+  zIndex?: number | string;
+  ribbon?: boolean;
+  ribbonText?: string;
+  ribbonColor?: string;
+  ribbonTextColor?: string;
+  ribbonSide?: "left" | "right";
+  ribbonType?: "corner" | "edge";
+  ribbonSize?: "normal" | "large";
+  ribbonWithStripes?: boolean;
+  borderRadius?: number | string;
+  flexWrap?: boolean | string;
+}
 
 interface Props extends ColumnDoc {
   children?: ReactNode;
@@ -55,7 +107,7 @@ function Column({
   ribbonType = "corner",
   ribbonWithStripes = true,
   borderRadius = 0,
-  flexWarp = false,
+  flexWrap = false,
 }: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -106,7 +158,7 @@ function Column({
 
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
-    flexWrap: flexWarp === "true" ? "wrap" : "unset",
+    flexWrap: flexWrap === "true" ? "wrap" : "unset",
   };
 
   return (
