@@ -64,6 +64,7 @@ function Row({
   alignItems = "stretch",
   justifyContent = "flex-start",
   flexGrow = 0,
+  rotate = 0,
 }: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -119,6 +120,7 @@ function Row({
     alignItems: alignItems,
     justifyItems: justifyContent,
     flexGrow: flexGrow,
+    rotate: `${rotate}deg`,
   };
 
   return (

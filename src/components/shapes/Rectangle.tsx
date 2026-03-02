@@ -62,6 +62,7 @@ function Rectangle({
   imageUrl = undefined,
   imageText = "Rectangle inner image",
   flexGrow = 0,
+  rotate = 0,
 }: RectangleDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -115,6 +116,7 @@ function Rectangle({
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
     flexGrow: flexGrow,
+    rotate: `${rotate}deg`,
   };
 
   return (

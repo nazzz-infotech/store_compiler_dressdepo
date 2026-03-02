@@ -64,6 +64,7 @@ function StarBurst({
   flexGrow = 0,
   spikes = 12,
   rotation = 0,
+  rotate = 0,
 }: StarBurstDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -142,6 +143,8 @@ function StarBurst({
     flexGrow: flexGrow,
     aspectRatio: 1,
     clipPath: getStarClipPath(spikes, rotation),
+    WebkitClipPath: getStarClipPath(spikes, rotation),
+    rotate: `${rotate}deg`,
   };
 
   return (

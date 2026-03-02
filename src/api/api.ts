@@ -122,6 +122,7 @@ export interface GenericStyleDoc {
   alignItems?: AlignItems;
   justifyContent?: JustifyContent;
   flexGrow?: number;
+  rotate?: number;
 }
 
 // re-export the helper from utils so callers can continue importing

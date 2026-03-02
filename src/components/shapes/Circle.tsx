@@ -59,6 +59,7 @@ function Circle({
   imageUrl = undefined,
   imageText = "Circle inner image",
   flexGrow = 0,
+  rotate = 0,
 }: CircleDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -112,6 +113,7 @@ function Circle({
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
     flexGrow : flexGrow,
+    rotate: `${rotate}deg`,
   };
 
   return (

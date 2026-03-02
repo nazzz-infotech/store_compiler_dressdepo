@@ -60,6 +60,7 @@ function Star({
   imageUrl = undefined,
   imageText = "Heart inner image",
   flexGrow = 0,
+  rotate = 0,
 }: StarDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -113,6 +114,7 @@ function Star({
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
     flexGrow: flexGrow,
+    rotate: `${rotate}deg`,
   };
 
   return (

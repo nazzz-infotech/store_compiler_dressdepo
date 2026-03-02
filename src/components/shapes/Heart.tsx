@@ -60,6 +60,7 @@ function Heart({
   imageUrl = undefined,
   imageText = "Heart inner image",
   flexGrow = 0,
+  rotate = 0,
 }: HeartDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -113,6 +114,7 @@ function Heart({
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
     flexGrow: flexGrow,
+    rotate: `${rotate}deg`,
   };
 
   return (
