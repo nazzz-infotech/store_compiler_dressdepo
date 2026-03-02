@@ -1,19 +1,16 @@
-import type { ReactNode } from "react";
-import { toRem } from "../utils/style";
 import { Ribbon } from "react-ribbons";
-import type { GenericStyleDoc } from "../api/api";
+import { toRem, type GenericStyleDoc } from "../../api/api";
+import "./ShapesSheet.css";
 
-export interface RowDoc extends GenericStyleDoc {
-  gap?: number | string;
+interface StarBurstDoc extends GenericStyleDoc {
+  size?: number;
+  imageUrl?: string | undefined;
+  imageText?: string;
+  spikes?: number;
+  rotation?: number;
 }
 
-interface Props extends RowDoc {
-  children?: ReactNode;
-}
-
-function Row({
-  gap = 0,
-  children,
+function StarBurst({
   padding = 0,
   paddingBottom = 0,
   paddingLeft = 0,
@@ -24,8 +21,8 @@ function Row({
   marginLeft = 0,
   marginRight = 0,
   marginTop = 0,
-  backgroundColor = "#ffffff",
-  textColor = "#000000",
+  backgroundColor = "#F8CA00",
+  textColor = "#ffffff",
   boxShadowHorizontalOffset = 0,
   boxShadowVerticalOffset = 0,
   boxShadowBlurRadius = 0,
@@ -61,14 +58,41 @@ function Row({
   ribbonWithStripes = true,
   borderRadius = 0,
   flexWrap = false,
-  alignItems = "stretch",
-  justifyContent = "flex-start",
+  size = 16,
+  imageUrl = undefined,
+  imageText = "Heart inner image",
   flexGrow = 0,
-}: Props) {
+  spikes = 12,
+  rotation = 0,
+}: StarBurstDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
+  function getStarClipPath(spikes: number, rotation = 0) {
+    const points: string[] = [];
+    const step = (Math.PI * 2) / spikes;
+    const halfStep = step / 2;
+    const outerRadius = 50; // percent
+    const innerRadius = 25; // percent
+
+    for (let i = 0; i < spikes; i++) {
+      const outerAngle = i * step - Math.PI / 2 + (rotation * Math.PI) / 180;
+      const innerAngle = outerAngle + halfStep;
+
+      const xOuter = 50 + outerRadius * Math.cos(outerAngle);
+      const yOuter = 50 + outerRadius * Math.sin(outerAngle);
+
+      const xInner = 50 + innerRadius * Math.cos(innerAngle);
+      const yInner = 50 + innerRadius * Math.sin(innerAngle);
+
+      points.push(`${xOuter}% ${yOuter}%`, `${xInner}% ${yInner}%`);
+    }
+
+    return `polygon(${points.join(",")})`;
+  }
+
   const style: React.CSSProperties = {
-    gap: toRem(gap),
+    height: toRem(size),
+    width: toRem(size),
     padding: toRem(padding),
     paddingBottom: toRem(paddingBottom),
     paddingLeft: toRem(paddingLeft),
@@ -114,11 +138,10 @@ function Row({
 
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
-    // treat string/boolean values the same way; only 'true' enables wrapping
-    flexWrap: flexWrap === true || flexWrap === "true" ? "wrap" : "unset",
-    alignItems: alignItems,
-    justifyItems: justifyContent,
+    flexWrap: flexWrap === "true" ? "wrap" : "unset",
     flexGrow: flexGrow,
+    aspectRatio: 1,
+    clipPath: getStarClipPath(spikes, rotation),
   };
 
   return (
@@ -138,12 +161,18 @@ function Row({
           </Ribbon>
         </div>
       )}
-
-      <div className="flex flex-row relative z-10 justify-center" style={style}>
-        {children}
-      </div>
+      {imageUrl ? (
+        <img
+          className="relative z-10 star"
+          alt={imageText}
+          src={imageUrl}
+          style={style}
+        />
+      ) : (
+        <div className="relative z-10 star" style={style} />
+      )}
     </div>
   );
 }
 
-export default Row;
+export default StarBurst;

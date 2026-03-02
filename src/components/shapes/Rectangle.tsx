@@ -2,10 +2,11 @@ import { Ribbon } from "react-ribbons";
 import { toRem } from "../../utils/style";
 import type { GenericStyleDoc } from "../../api/api";
 
-// props defined in component so registry/api can import without cycle
-export interface RectangleDoc extends GenericStyleDoc {
+interface RectangleDoc extends GenericStyleDoc {
   height?: number;
   width?: number;
+  imageUrl?: string | undefined;
+  imageText?: string;
 }
 
 function Rectangle({
@@ -58,6 +59,9 @@ function Rectangle({
   flexWrap = false,
   height = 16,
   width = 16,
+  imageUrl = undefined,
+  imageText = "Rectangle inner image",
+  flexGrow = 0,
 }: RectangleDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -110,6 +114,7 @@ function Rectangle({
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
+    flexGrow: flexGrow,
   };
 
   return (
@@ -129,7 +134,16 @@ function Rectangle({
           </Ribbon>
         </div>
       )}
-      <div className="relative z-10" style={style} />
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={imageText}
+          className="relative z-10"
+          style={style}
+        />
+      ) : (
+        <div className="relative z-10" style={style} />
+      )}
     </div>
   );
 }

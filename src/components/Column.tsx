@@ -63,6 +63,7 @@ function Column({
   flexWrap = false,
   alignItems = "stretch",
   justifyContent = "flex-start",
+  flexGrow = 0,
 }: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
@@ -116,6 +117,7 @@ function Column({
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
     alignItems: alignItems,
     justifyItems: justifyContent,
+    flexGrow: flexGrow,
   };
 
   return (

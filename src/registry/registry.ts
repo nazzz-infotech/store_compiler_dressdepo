@@ -1,7 +1,11 @@
 import { Banner } from "../components/Banner";
 import Column from "../components/Column";
 import Row from "../components/Row";
+import Circle from "../components/shapes/Circle";
+import Heart from "../components/shapes/Heart";
 import Rectangle from "../components/shapes/Rectangle";
+import Star from "../components/shapes/Star";
+import StarBurst from "../components/shapes/StarBurst";
 import Text from "../components/Text";
 
 // `as const` keeps the keys literal so we can derive types from them later.
@@ -11,6 +15,10 @@ export const registry = {
   row: Row,
   text: Text,
   rectangle: Rectangle,
+  circle: Circle,
+  heart: Heart,
+  star: Star,
+  starburst: StarBurst,
 } as const;
 
 export type Registry = typeof registry;

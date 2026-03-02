@@ -10,7 +10,6 @@ import type { BannerDoc as BannerProps } from "../components/Banner";
 import type { ColumnDoc as ColumnProps } from "../components/Column";
 import type { RowDoc as RowProps } from "../components/Row";
 import type { TextDoc as TextProps } from "../components/Text";
-import type { RectangleDoc as RectangleProps } from "../components/shapes/Rectangle";
 
 // prop aliases that mirror the previous names so that other modules can still
 // import `BannerDoc`, `ColumnDoc`, etc. (public API remains stable).  These
@@ -19,7 +18,6 @@ export type BannerDoc = BannerProps;
 export type ColumnDoc = ColumnProps; // used for columns/rows
 export type RowDoc = RowProps; // used for columns/rows
 export type TextDoc = TextProps;
-export type RectangleDoc = RectangleProps;
 
 // (We no longer re-export ComponentProps; if someone needs the full map they
 // can import from registry directly.)
@@ -32,7 +30,6 @@ export interface ParsedColumnDoc extends ColumnDoc {
   banner?: BannerDoc | BannerDoc[];
   text?: TextDoc | TextDoc[];
   row?: ParsedRowDoc | ParsedRowDoc[];
-  rectangle?: RectangleDoc | RectangleDoc[];
 }
 
 export interface ParsedRowDoc extends RowDoc {
@@ -40,14 +37,12 @@ export interface ParsedRowDoc extends RowDoc {
   text?: TextDoc | TextDoc[];
   column?: ParsedColumnDoc | ParsedColumnDoc[];
   row?: ParsedRowDoc | ParsedRowDoc[];
-  rectangle?: RectangleDoc | RectangleDoc[];
 }
 
 export interface StoreDoc {
   banner?: BannerDoc | BannerDoc[];
   column?: ParsedColumnDoc | ParsedColumnDoc[];
   row?: ParsedRowDoc | ParsedRowDoc[];
-  rectangle: RectangleDoc | RectangleDoc[];
 }
 
 export type JustifyContent =
@@ -126,6 +121,7 @@ export interface GenericStyleDoc {
   flexWrap?: boolean | string;
   alignItems?: AlignItems;
   justifyContent?: JustifyContent;
+  flexGrow?: number;
 }
 
 // re-export the helper from utils so callers can continue importing
