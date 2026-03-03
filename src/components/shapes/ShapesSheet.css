@@ -18,5 +18,42 @@
 
 .star {
   aspect-ratio: 1;
-  clip-path: polygon(50% 0,79% 90%,2% 35%,98% 35%,21% 90%); 
+  clip-path: polygon(50% 0, 79% 90%, 2% 35%, 98% 35%, 21% 90%);
+}
+
+/* HTML: <div class="triangle"></div> */
+.triangle {
+  width: 180px;
+  aspect-ratio: 1 / cos(30deg);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.rhombus {
+  height: 200px; /* adjust to control the size  */
+  aspect-ratio: 1;
+  clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+}
+
+.hexagon_1 {
+  height: 200px; /* adjust to control the size  */
+  aspect-ratio: 1/cos(30deg);
+  clip-path: polygon(50% -50%,100% 50%,50% 150%,0 50%);
+}
+
+.hexagon_2 {
+  height: 200px; /* adjust to control the size  */
+  aspect-ratio: cos(30deg);
+  clip-path: polygon(-50% 50%,50% 100%,150% 50%,50% 0);
+}
+
+.octagon {
+  width: 200px;
+  aspect-ratio: 1;
+  --o:calc(50%*tan(-22.5deg));
+  clip-path: polygon(
+    var(--o) 50%,
+    50% var(--o),
+    calc(100% - var(--o)) 50%,
+    50% calc(100% - var(--o))
+  );
 }

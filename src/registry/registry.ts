@@ -3,9 +3,13 @@ import Column from "../components/Column";
 import Row from "../components/Row";
 import Circle from "../components/shapes/Circle";
 import Heart from "../components/shapes/Heart";
+import Hexagon from "../components/shapes/Hexagon";
+import Octagon from "../components/shapes/Octagon";
 import Rectangle from "../components/shapes/Rectangle";
+import Rhombus from "../components/shapes/Rhombus";
 import Star from "../components/shapes/Star";
 import StarBurst from "../components/shapes/StarBurst";
+import Triangle from "../components/shapes/Triangle";
 import Text from "../components/Text";
 
 // `as const` keeps the keys literal so we can derive types from them later.
@@ -19,6 +23,10 @@ export const registry = {
   heart: Heart,
   star: Star,
   starburst: StarBurst,
+  triangle: Triangle,
+  rhombus: Rhombus,
+  hexagon: Hexagon,
+  octagon: Octagon,
 } as const;
 
 export type Registry = typeof registry;

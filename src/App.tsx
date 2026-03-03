@@ -12,7 +12,7 @@ const xml = `
   <row gap="5" backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
     borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹" ribbonType="corner"
     ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false">
-    <starburst spikes="16" type="border" rotation="5" size="64" margin="8" backgroundColor="purple" ribbon="true" ribbonText="Shape" ribbonColor="#512da8" ribbonType="edge" />
+    <octagon size="64" margin="8" backgroundColor="navy" ribbon="true" ribbonText="Shape" ribbonColor="#512da8" ribbonType="edge" />
   </row>
 </store>
 `;
