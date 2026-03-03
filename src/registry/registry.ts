@@ -10,6 +10,7 @@ import Rhombus from "../components/shapes/Rhombus";
 import Star from "../components/shapes/Star";
 import StarBurst from "../components/shapes/StarBurst";
 import Triangle from "../components/shapes/Triangle";
+import ZigzagBox from "../components/shapes/zigzag/ZigzagBox";
 import Text from "../components/Text";
 
 // `as const` keeps the keys literal so we can derive types from them later.
@@ -27,6 +28,7 @@ export const registry = {
   rhombus: Rhombus,
   hexagon: Hexagon,
   octagon: Octagon,
+  zigzag_box: ZigzagBox,
 } as const;
 
 export type Registry = typeof registry;

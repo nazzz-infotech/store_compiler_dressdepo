@@ -12,8 +12,10 @@ const xml = `
   <row gap="5" backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
     borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹" ribbonType="corner"
     ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false">
-    <octagon size="64" margin="8" backgroundColor="navy" ribbon="true" ribbonText="Shape" ribbonColor="#512da8" ribbonType="edge" />
-  </row>
+    <zigzag_box size="64" width="128" height="128" margin="8" backgroundColor="navy" ribbon="true" ribbonText="Shape" ribbonColor="#512da8" ribbonType="edge">
+    <text text="hello !" />
+    </zigzag_box>
+    </row>
 </store>
 `;
 
