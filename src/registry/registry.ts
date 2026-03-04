@@ -1,6 +1,8 @@
 import { Banner } from "../components/Banner";
 import Column from "../components/Column";
 import Grid from "../components/grids/Grid";
+import ResponsiveGrid from "../components/grids/ResponsiveGrid";
+import Image from "../components/Image";
 import Row from "../components/Row";
 import Circle from "../components/shapes/Circle";
 import Heart from "../components/shapes/Heart";
@@ -35,6 +37,8 @@ export const registry = {
   zigzag_line: ZigzagLine,
   lollipop: Lollipop,
   grid: Grid,
+  responsive_grid: ResponsiveGrid,
+  image: Image,
 } as const;
 
 export type Registry = typeof registry;

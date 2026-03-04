@@ -8,13 +8,20 @@ export interface BannerDoc {
   disableChildren?: boolean;
 }
 
-export function Banner({ image, title, subtitle, disableChildren = false, children }: BannerDoc & { children?: ReactNode }) {
+export function Banner({
+  image,
+  title,
+  subtitle,
+  disableChildren = false,
+  children,
+}: BannerDoc & { children?: ReactNode }) {
   return (
     <div className="relative h-72 w-full">
       <img
         src={image}
         alt={"Banner Image"}
         className="w-full h-full object-cover"
+        loading="eager"
       />
       <Typography
         variant="h4"

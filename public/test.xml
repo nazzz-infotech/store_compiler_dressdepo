@@ -5,16 +5,42 @@
         title="Hi, 3z Fashions"
         subtitle="here's is your new store, let it customize !"
     />
-    <grid gap="5" backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
+    <responsive_grid gap="5" xsCols="1" smCols="1" mdCols="2" lgCols="4" xlCols="4" xxlCols="6"
+        backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
         borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹"
         ribbonType="corner"
-        ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false" cols="4"
+        ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false"
     >
-        <lollipop size="32" firstColor="navy" secondColor="green" />
-        <lollipop size="32" firstColor="navy" secondColor="green" />
-        <lollipop size="32" firstColor="navy" secondColor="green" />
-        <lollipop size="32" firstColor="navy" secondColor="green" />
-        <lollipop size="32" firstColor="navy" secondColor="green" />
-        <lollipop size="32" firstColor="navy" secondColor="green" />
-    </grid>
+        <!-- Eager -->
+
+        <image
+            imageUrl="https://picsum.photos/512/522"
+            loading="eager" height="512" width="512" />
+        <image
+            imageUrl="https://picsum.photos/512/523"
+            loading="eager" height="512" width="512" />
+        <image
+            imageUrl="https://picsum.photos/512/524"
+            loading="eager" height="512" width="512" />
+        <image
+            imageUrl="https://picsum.photos/512/555"
+            loading="eager" height="512" width="512" />
+
+        <!-- Lazy -->
+
+
+        <image
+            imageUrl="https://picsum.photos/512/500"
+            loading="lazy" height="512" width="512" />
+        <image
+            imageUrl="https://picsum.photos/512/501"
+            loading="lazy" height="512" width="512" />
+        <image
+            imageUrl="https://picsum.photos/512/511"
+            loading="lazy" height="512" width="512" />
+        <image
+            imageUrl="https://picsum.photos/512/509"
+            loading="lazy" height="512" width="512" />
+
+    </responsive_grid>
 </store>

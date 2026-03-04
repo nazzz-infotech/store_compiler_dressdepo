@@ -1,21 +1,15 @@
-import type { ReactNode } from "react";
-import { toRem } from "../utils/style";
 import { Ribbon } from "react-ribbons";
-import type { GenericStyleDoc } from "../api/api";
+import { toRem, type GenericStyleDoc } from "../api/api";
 
-export interface RowDoc extends GenericStyleDoc {
-  gap?: number | string;
-  disableChildren?: boolean;
+interface ImageDoc extends GenericStyleDoc {
+  width?: number | string;
+  height?: number | string;
+  imageUrl?: string | undefined;
+  imageText?: string;
+  loading?: "lazy" | "eager";
 }
 
-interface Props extends RowDoc {
-  children?: ReactNode;
-}
-
-function Row({
-  gap = 0,
-  children,
-  disableChildren = false,
+function Image({
   padding = 0,
   paddingBottom = 0,
   paddingLeft = 0,
@@ -63,11 +57,14 @@ function Row({
   ribbonWithStripes = true,
   borderRadius = 0,
   flexWrap = false,
-  alignItems = "stretch",
-  justifyContent = "flex-start",
+  height = 256,
+  width = 256,
+  imageUrl = undefined,
+  imageText = "Image can't load",
   flexGrow = 0,
   rotate = 0,
-}: Props) {
+  loading = "lazy",
+}: ImageDoc) {
   const hasMainBorder = Number(borderSize) > 0;
 
   /* Fix padding */
@@ -83,7 +80,6 @@ function Row({
   if (marginLeft === 0) marginLeft = margin;
 
   const style: React.CSSProperties = {
-    gap: toRem(gap),
     padding: toRem(padding),
     paddingBottom: toRem(paddingBottom),
     paddingLeft: toRem(paddingLeft),
@@ -129,10 +125,7 @@ function Row({
 
     borderRadius: toRem(borderRadius),
     zIndex: Number(zIndex) + 10,
-    // treat string/boolean values the same way; only 'true' enables wrapping
-    flexWrap: flexWrap === true || flexWrap === "true" ? "wrap" : "unset",
-    alignItems: alignItems,
-    justifyItems: justifyContent,
+    flexWrap: flexWrap === "true" ? "wrap" : "unset",
     flexGrow: flexGrow,
     rotate: `${rotate}deg`,
   };
@@ -154,12 +147,17 @@ function Row({
           </Ribbon>
         </div>
       )}
-
-      <div className="flex flex-row relative z-10 justify-center" style={style}>
-        {!disableChildren && children}
-      </div>
+      <img
+        className="relative z-10 circle flex flex-col items-center justify-center inset-0 w-full h-full"
+        style={style}
+        src={imageUrl}
+        alt={imageText}
+        height={height}
+        width={width}
+        loading={loading}
+      />
     </div>
   );
 }
 
-export default Row;
+export default Image;

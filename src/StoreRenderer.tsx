@@ -59,7 +59,7 @@ function convertStoreToNodes(store: XmlObject): LayoutNode[] {
   return nodes;
 }
 
-export function StoreRenderer({ xml }: Props) {
+export default function StoreRenderer({ xml }: Props) {
   const parsedUnknown = parseXml(xml);
   if (typeof parsedUnknown !== "object" || parsedUnknown === null) {
     return null;

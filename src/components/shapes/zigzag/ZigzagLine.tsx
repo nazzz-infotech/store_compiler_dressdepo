@@ -82,6 +82,18 @@ function ZigzagLine({
 }: Props & ZigzagExtraCss) {
   const hasMainBorder = Number(borderSize) > 0;
 
+  /* Fix padding */
+  if (paddingTop === 0) paddingTop = padding;
+  if (paddingBottom === 0) paddingBottom = padding;
+  if (paddingRight === 0) paddingRight = padding;
+  if (paddingLeft === 0) paddingLeft = padding;
+
+  /* Fix margin */
+  if (marginTop === 0) marginTop = margin;
+  if (marginBottom === 0) marginBottom = margin;
+  if (marginRight === 0) marginRight = margin;
+  if (marginLeft === 0) marginLeft = margin;
+
   const style: React.CSSProperties & {
     "--a"?: string | number;
     "--b"?: string | number;
