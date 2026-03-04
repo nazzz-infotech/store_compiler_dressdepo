@@ -1,5 +1,6 @@
 import { Banner } from "../components/Banner";
 import Column from "../components/Column";
+import Grid from "../components/grids/Grid";
 import Row from "../components/Row";
 import Circle from "../components/shapes/Circle";
 import Heart from "../components/shapes/Heart";
@@ -33,6 +34,7 @@ export const registry = {
   zigzag_box: ZigzagBox,
   zigzag_line: ZigzagLine,
   lollipop: Lollipop,
+  grid: Grid,
 } as const;
 
 export type Registry = typeof registry;
