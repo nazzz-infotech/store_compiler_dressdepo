@@ -1,10 +1,16 @@
+import type { ReactNode } from "react";
 import { Ribbon } from "react-ribbons";
 import { toRem, type GenericStyleDoc } from "../../api/api";
 
 interface CircleDoc extends GenericStyleDoc {
+  disableChildren?: boolean;
   size?: number;
   imageUrl?: string | undefined;
   imageText?: string;
+}
+
+interface Props extends CircleDoc {
+  children?: ReactNode;
 }
 
 function Circle({
@@ -45,6 +51,8 @@ function Circle({
   borderBottomSize = 0,
   borderBottomType = "solid",
   zIndex = 0,
+  disableChildren = false,
+  children,
   ribbon = false,
   ribbonColor = "#388e3c",
   ribbonSide = "left",
@@ -60,7 +68,7 @@ function Circle({
   imageText = "Circle inner image",
   flexGrow = 0,
   rotate = 0,
-}: CircleDoc) {
+}: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
   const style: React.CSSProperties = {
@@ -133,16 +141,17 @@ function Circle({
           </Ribbon>
         </div>
       )}
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={imageText}
-          className="relative z-10"
-          style={style}
-        />
-      ) : (
-        <div className="relative z-10" style={style} />
-      )}
+      <div className="relative z-10 circle flex flex-col items-center justify-center" style={style}>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={imageText}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "cover" }}
+          />
+        )}
+        {!disableChildren && <div className="relative z-10">{children}</div>}
+      </div>
     </div>
   );
 }

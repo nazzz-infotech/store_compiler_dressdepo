@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Typography } from "@mui/material";
 // the only props this component needs
 import type { TypographyVariant } from "@mui/material";
@@ -6,13 +7,16 @@ export interface TextDoc {
   text?: string;
   type?: TypographyVariant;
   textColor?: string;
+  disableChildren?: boolean;
 }
 
 function Text({
   text = "",
   type = "body1", // 'type' renamed to 'variant' to match MUI standards
   textColor = "text.primary", // Support for theme-aware colors (e.g., 'primary.main')
-}: TextDoc) {
+  disableChildren = false,
+  children,
+}: TextDoc & { children?: ReactNode }) {
   return (
     <Typography
       variant={type}
@@ -21,6 +25,7 @@ function Text({
       }}
     >
       {text}
+      {!disableChildren && children}
     </Typography>
   );
 }

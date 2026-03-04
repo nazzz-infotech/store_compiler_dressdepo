@@ -5,6 +5,7 @@ import type { GenericStyleDoc } from "../api/api";
 
 export interface RowDoc extends GenericStyleDoc {
   gap?: number | string;
+  disableChildren?: boolean;
 }
 
 interface Props extends RowDoc {
@@ -14,6 +15,7 @@ interface Props extends RowDoc {
 function Row({
   gap = 0,
   children,
+  disableChildren = false,
   padding = 0,
   paddingBottom = 0,
   paddingLeft = 0,
@@ -142,7 +144,7 @@ function Row({
       )}
 
       <div className="flex flex-row relative z-10 justify-center" style={style}>
-        {children}
+        {!disableChildren && children}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import type { GenericStyleDoc } from "../api/api";
 
 export interface ColumnDoc extends GenericStyleDoc {
   gap?: number | string;
+  disableChildren?: boolean;
 }
 
 interface Props extends ColumnDoc {
@@ -14,6 +15,7 @@ interface Props extends ColumnDoc {
 function Column({
   gap = 0,
   children,
+  disableChildren = false,
   padding = 0,
   paddingBottom = 0,
   paddingLeft = 0,
@@ -141,7 +143,7 @@ function Column({
       )}
 
       <div className="flex flex-col relative z-10" style={style}>
-        {children}
+        {!disableChildren && children}
       </div>
     </div>
   );

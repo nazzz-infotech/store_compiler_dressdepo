@@ -15,6 +15,7 @@ interface Props {
 
 function convertParsedToNode(parsed: XmlObject, type: keyof typeof registry): LayoutNode {
   const children: LayoutNode[] = [];
+  const usedAsChildren = new Set<string>();
 
   // recursively turn registered child elements into nodes
   Object.entries(parsed).forEach(([key, value]) => {
@@ -24,18 +25,17 @@ function convertParsedToNode(parsed: XmlObject, type: keyof typeof registry): La
       const items = Array.isArray(value) ? value : [value];
       items.forEach(item => {
         if (typeof item === "object" && item !== null) {
+          usedAsChildren.add(key);
           children.push(convertParsedToNode(item as XmlObject, compKey));
         }
       });
     }
   });
 
-  // props are everything except recognized children keys
+  // props are everything except keys that were actually used as children elements
   const props: XmlObject = { ...parsed };
-  (Object.keys(registry) as Array<keyof typeof registry>).forEach(childKey => {
-    if (props[childKey] !== undefined) {
-      delete props[childKey];
-    }
+  usedAsChildren.forEach(childKey => {
+    delete props[childKey];
   });
 
   return { type, props: props as LayoutNode["props"], children: children.length ? children : undefined };

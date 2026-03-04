@@ -1,12 +1,18 @@
+import type { ReactNode } from "react";
 import { Ribbon } from "react-ribbons";
 import { toRem, type GenericStyleDoc } from "../../../api/api";
 import "../ShapesSheet.css";
 
 interface ZigzagBoxDoc extends GenericStyleDoc {
+  disableChildren?: boolean;
   width?: number;
   height?: number;
   imageUrl?: string | undefined;
   imageText?: string;
+}
+
+interface Props extends ZigzagBoxDoc {
+  children?: ReactNode;
 }
 
 function ZigzagBox({
@@ -63,7 +69,9 @@ function ZigzagBox({
   imageText = "Circle inner image",
   flexGrow = 0,
   rotate = 0,
-}: ZigzagBoxDoc) {
+  disableChildren = false,
+  children,
+}: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
   const style: React.CSSProperties = {
@@ -136,16 +144,17 @@ function ZigzagBox({
           </Ribbon>
         </div>
       )}
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={imageText}
-          className="relative z-10 zigzag_box"
-          style={style}
-        />
-      ) : (
-        <div className="relative z-10 zigzag_box" style={style} />
-      )}
+      <div className="relative z-10 zigzag_box flex flex-col items-center justify-center" style={style}>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={imageText}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "cover" }}
+          />
+        )}
+        {!disableChildren && <div className="relative z-10">{children}</div>}
+      </div>
     </div>
   );
 }

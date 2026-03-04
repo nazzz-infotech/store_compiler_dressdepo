@@ -1,13 +1,19 @@
+import type { ReactNode } from "react";
 import { Ribbon } from "react-ribbons";
 import { toRem, type GenericStyleDoc } from "../../api/api";
 import "./ShapesSheet.css";
 
 interface StarBurstDoc extends GenericStyleDoc {
+  disableChildren?: boolean;
   size?: number;
   imageUrl?: string | undefined;
   imageText?: string;
   spikes?: number;
   rotation?: number;
+}
+
+interface Props extends StarBurstDoc {
+  children?: ReactNode;
 }
 
 function StarBurst({
@@ -64,8 +70,10 @@ function StarBurst({
   flexGrow = 0,
   spikes = 12,
   rotation = 0,
+  disableChildren = false,
+  children,
   rotate = 0,
-}: StarBurstDoc) {
+}: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
   function getStarClipPath(spikes: number, rotation = 0) {
@@ -164,16 +172,17 @@ function StarBurst({
           </Ribbon>
         </div>
       )}
-      {imageUrl ? (
-        <img
-          className="relative z-10 star"
-          alt={imageText}
-          src={imageUrl}
-          style={style}
-        />
-      ) : (
-        <div className="relative z-10 star" style={style} />
-      )}
+      <div className="relative z-10 flex flex-col items-center justify-center" style={style}>
+        {imageUrl && (
+          <img
+            className="absolute inset-0 w-full h-full"
+            alt={imageText}
+            src={imageUrl}
+            style={{ objectFit: "cover" }}
+          />
+        )}
+        {!disableChildren && <div className="relative z-10">{children}</div>}
+      </div>
     </div>
   );
 }

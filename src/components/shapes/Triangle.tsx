@@ -1,11 +1,17 @@
+import type { ReactNode } from "react";
 import { Ribbon } from "react-ribbons";
 import { toRem, type GenericStyleDoc } from "../../api/api";
 import "./ShapesSheet.css";
 
 interface TriangleDoc extends GenericStyleDoc {
+  disableChildren?: boolean;
   size?: number;
   imageUrl?: string | undefined;
   imageText?: string;
+}
+
+interface Props extends TriangleDoc {
+  children?: ReactNode;
 }
 
 function Triangle({
@@ -46,6 +52,8 @@ function Triangle({
   borderBottomSize = 0,
   borderBottomType = "solid",
   zIndex = 0,
+  disableChildren = false,
+  children,
   ribbon = false,
   ribbonColor = "#388e3c",
   ribbonSide = "left",
@@ -61,7 +69,7 @@ function Triangle({
   imageText = "Heart inner image",
   flexGrow = 0,
   rotate = 0,
-}: TriangleDoc) {
+}: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
   const style: React.CSSProperties = {
@@ -134,16 +142,17 @@ function Triangle({
           </Ribbon>
         </div>
       )}
-      {imageUrl ? (
-        <img
-          className="relative z-10 triangle"
-          alt={imageText}
-          src={imageUrl}
-          style={style}
-        />
-      ) : (
-        <div className="relative z-10 triangle" style={style} />
-      )}
+      <div className="relative z-10 triangle flex flex-col items-center justify-center" style={style}>
+        {imageUrl && (
+          <img
+            className="absolute inset-0 w-full h-full"
+            alt={imageText}
+            src={imageUrl}
+            style={{ objectFit: "cover" }}
+          />
+        )}
+        {!disableChildren && <div className="relative z-10">{children}</div>}
+      </div>
     </div>
   );
 }

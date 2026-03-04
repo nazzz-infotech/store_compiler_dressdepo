@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<store xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <banner
+        image="https://storage.googleapis.com/dressdepo_storage_bucket/sellers/assets/default/default_store_banner.png"
+        title="Hi, 3z Fashions"
+        subtitle="here's is your new store, let it customize !"
+    />
+    <row gap="5" backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
+        borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹"
+        ribbonType="corner"
+        ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false">
+        <circle size="55" backgroundColor="navy">
+            <rhombus size="50">
+                <triangle size="32" />
+            </rhombus>
+        </circle>
+    </row>
+    <column gap="2">
+        <text text="Hello world" textColor="black" />
+        <circle size="55" backgroundColor="navy">
+            <text text="Hello!" textColor="white" />
+        </circle>
+    </column>
+</store>

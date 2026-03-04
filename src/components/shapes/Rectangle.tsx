@@ -1,12 +1,18 @@
+import type { ReactNode } from "react";
 import { Ribbon } from "react-ribbons";
 import { toRem } from "../../utils/style";
 import type { GenericStyleDoc } from "../../api/api";
 
 interface RectangleDoc extends GenericStyleDoc {
+  disableChildren?: boolean;
   height?: number;
   width?: number;
   imageUrl?: string | undefined;
   imageText?: string;
+}
+
+interface Props extends RectangleDoc {
+  children?: ReactNode;
 }
 
 function Rectangle({
@@ -47,6 +53,8 @@ function Rectangle({
   borderBottomSize = 0,
   borderBottomType = "solid",
   zIndex = 0,
+  disableChildren = false,
+  children,
   ribbon = false,
   ribbonColor = "#388e3c",
   ribbonSide = "left",
@@ -63,7 +71,7 @@ function Rectangle({
   imageText = "Rectangle inner image",
   flexGrow = 0,
   rotate = 0,
-}: RectangleDoc) {
+}: Props) {
   const hasMainBorder = Number(borderSize) > 0;
 
   const style: React.CSSProperties = {
@@ -136,16 +144,17 @@ function Rectangle({
           </Ribbon>
         </div>
       )}
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={imageText}
-          className="relative z-10"
-          style={style}
-        />
-      ) : (
-        <div className="relative z-10" style={style} />
-      )}
+      <div className="relative z-10 flex flex-col items-center justify-center" style={style}>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={imageText}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "cover" }}
+          />
+        )}
+        {!disableChildren && <div className="relative z-10">{children}</div>}
+      </div>
     </div>
   );
 }

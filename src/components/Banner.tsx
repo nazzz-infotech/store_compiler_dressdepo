@@ -1,12 +1,14 @@
+import type { ReactNode } from "react";
 import { Typography } from "@mui/material";
 
 export interface BannerDoc {
   image: string;
   title: string;
   subtitle?: string;
+  disableChildren?: boolean;
 }
 
-export function Banner({ image, title, subtitle }: BannerDoc) {
+export function Banner({ image, title, subtitle, disableChildren = false, children }: BannerDoc & { children?: ReactNode }) {
   return (
     <div className="relative h-72 w-full">
       <img
@@ -26,6 +28,7 @@ export function Banner({ image, title, subtitle }: BannerDoc) {
       >
         {subtitle}
       </Typography>
+      {!disableChildren && children}
     </div>
   );
 }
