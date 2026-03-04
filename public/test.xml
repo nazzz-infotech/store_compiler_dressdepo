@@ -9,16 +9,6 @@
         borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹"
         ribbonType="corner"
         ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false">
-        <circle size="55" backgroundColor="navy">
-            <rhombus size="50">
-                <triangle size="32" />
-            </rhombus>
-        </circle>
+        <zigzag_line backgroundColor="navy" thickness="2" angle="90" />
     </row>
-    <column gap="2">
-        <text text="Hello world" textColor="black" />
-        <circle size="55" backgroundColor="navy">
-            <text text="Hello!" textColor="white" />
-        </circle>
-    </column>
 </store>
