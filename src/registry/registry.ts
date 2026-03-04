@@ -4,6 +4,7 @@ import Row from "../components/Row";
 import Circle from "../components/shapes/Circle";
 import Heart from "../components/shapes/Heart";
 import Hexagon from "../components/shapes/Hexagon";
+import Lollipop from "../components/shapes/Lollipop";
 import Octagon from "../components/shapes/Octagon";
 import Rectangle from "../components/shapes/Rectangle";
 import Rhombus from "../components/shapes/Rhombus";
@@ -31,6 +32,7 @@ export const registry = {
   octagon: Octagon,
   zigzag_box: ZigzagBox,
   zigzag_line: ZigzagLine,
+  lollipop: Lollipop,
 } as const;
 
 export type Registry = typeof registry;

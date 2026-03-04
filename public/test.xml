@@ -9,6 +9,6 @@
         borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹"
         ribbonType="corner"
         ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false">
-        <zigzag_line backgroundColor="navy" thickness="2" angle="90" />
+        <lollipop size="32" firstColor="navy" secondColor="green" />
     </row>
 </store>
