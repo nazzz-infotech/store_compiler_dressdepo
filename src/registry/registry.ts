@@ -3,6 +3,7 @@ import Column from "../components/Column";
 import Grid from "../components/grids/Grid";
 import ResponsiveGrid from "../components/grids/ResponsiveGrid";
 import Image from "../components/Image";
+import ProductCard from "../components/ProductCard";
 import Row from "../components/Row";
 import Circle from "../components/shapes/Circle";
 import Heart from "../components/shapes/Heart";
@@ -39,6 +40,7 @@ export const registry = {
   grid: Grid,
   responsive_grid: ResponsiveGrid,
   image: Image,
+  product_card: ProductCard,
 } as const;
 
 export type Registry = typeof registry;

@@ -26,6 +26,45 @@ export type TextDoc = TextProps;
 // if it’s only consumed by the compiler, but keeping the parsing helpers makes
 // the transition incremental.
 
+export default function apiUrl() {
+  return "https://storage.googleapis.com/dressdepo_storage_bucket";
+}
+
+export function applyDiscount(price: number, discountPercent: number) {
+  const discounted = price - (price * discountPercent) / 100;
+  return Math.floor(discounted); // round to nearest whole number
+}
+
+/**
+ * Converts a numeric rating to an RGB color value.
+ *
+ * @param {number} rating - The rating value to convert (will be clamped between 1 and 5)
+ * @returns {string} An RGB color string in the format 'rgb(r, g, b)' where red represents low ratings and green represents high ratings
+ *
+ * @example
+ * getRatingColor(1) // returns 'rgb(235, 30, 75)' - red
+ * getRatingColor(5) // returns 'rgb(18, 140, 39)' - green
+ * getRatingColor(3) // returns 'rgb(129, 114, 64)' - orange/brown
+ */
+export function getRatingColor(rating: number) {
+  // Clamp rating between 1 and 5
+  const value = Math.min(5, Math.max(1, rating));
+
+  // Normalize (1 → 0, 5 → 1)
+  const t = (value - 1) / 4;
+
+  // Start (red) and end (green) colors
+  const start = { r: 235, g: 30, b: 75 }; // #eb1e4b
+  const end = { r: 18, g: 140, b: 39 }; // #128c27
+
+  // Interpolate
+  const r = Math.round(start.r + (end.r - start.r) * t);
+  const g = Math.round(start.g + (end.g - start.g) * t);
+  const b = Math.round(start.b + (end.b - start.b) * t);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 export interface ParsedColumnDoc extends ColumnDoc {
   banner?: BannerDoc | BannerDoc[];
   text?: TextDoc | TextDoc[];
@@ -123,6 +162,58 @@ export interface GenericStyleDoc {
   justifyContent?: JustifyContent;
   flexGrow?: number;
   rotate?: number;
+}
+
+export type ProductType = {
+  _id: string;
+  title: string;
+  description: string;
+  type: string;
+  occasion: string;
+  color: string;
+  images: {
+    front: string;
+    back: string;
+    side: string;
+    other: string;
+    other1: string;
+    other2: string;
+    other3: string;
+  };
+  sizes: string[];
+  price: { mrp: number; discount: number };
+  article: string;
+  fabric: string;
+  pattern: string;
+  inventory: Record<string, number>;
+  productCode: string;
+  colorCode: string;
+  gender: string;
+  tagLine: string;
+  sleeve: string;
+  brand: string;
+  hsn: number;
+  gst: number;
+  origin: number;
+  seller_contact_number: number;
+  seller_email_address: string;
+  seller_id: string;
+};
+
+export async function fetchProduct(id: string): Promise<ProductType | undefined> {
+  const response = await fetch(
+    `/api/get-item?id=${id}`,
+  );
+  if (response.status === 404) {
+    alert("Product not found");
+    return;
+  }
+  if (response.status === 400) {
+    alert("id not found");
+    return;
+  }
+  const json = await response.json();
+  return json.data;
 }
 
 // re-export the helper from utils so callers can continue importing

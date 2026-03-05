@@ -2,10 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "path";
+import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), dts({ insertTypesEntry: true })],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"), // main export file
@@ -20,6 +21,14 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
         },
+      },
+    },
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://192.168.1.12:3001",
+        changeOrigin: true,
       },
     },
   },

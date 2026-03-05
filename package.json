@@ -36,7 +36,8 @@
     "tailwindcss": "^4.2.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
-    "vite": "^8.0.0-beta.13"
+    "vite": "^8.0.0-beta.13",
+    "vite-plugin-dts": "^4.5.4"
   },
   "pnpm": {
     "overrides": {
@@ -45,5 +46,9 @@
   },
   "sideEffects": [
     "*.css"
-  ]
+  ],
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
 }
