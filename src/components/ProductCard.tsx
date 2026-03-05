@@ -166,7 +166,7 @@ function ProductCard({
   };
 
   return (
-    <div className="relative" style={style}>
+    <div className="flex! relative! items-center! justify-center! rounded-sm! w-full!" style={style}>
       <Box sx={{ position: "absolute", top: 0, left: 0, zIndex: 10, ml: 0.3 }}>
         {data.tagLine !== "EMT" ? (
           <Ribbon
