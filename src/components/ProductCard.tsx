@@ -184,7 +184,7 @@ function ProductCard({
       </Box>
       <Card>
         <a
-          href={`/product/${data._id}`}
+          href={`https://dressdepo.com/product/${data._id}`}
           target="_blank"
           rel="noopener noreferrer"
         >
