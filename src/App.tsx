@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import StoreRenderer from "./StoreRenderer";
+import { StoreRenderer } from "./StoreRenderer";
 
 function App() {
   const [xml, setXml] = useState("");

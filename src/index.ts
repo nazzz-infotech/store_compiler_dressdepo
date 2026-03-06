@@ -1,1 +1,3 @@
-export { default as StoreRenderer } from "./StoreRenderer";
+import "./index.css";
+
+export { StoreRenderer } from "./StoreRenderer";
