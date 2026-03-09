@@ -5,6 +5,7 @@
         title="Hi, 3z Fashions"
         subtitle="here's is your new store, let it customize !"
     />
+    <text text="Hello World" />
     <responsive_grid gap="5" xsCols="1" smCols="1" mdCols="2" lgCols="4" xlCols="4" xxlCols="6"
         backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
         borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹"

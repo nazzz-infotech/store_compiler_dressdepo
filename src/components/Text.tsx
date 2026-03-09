@@ -22,6 +22,9 @@ function Text({
       variant={type}
       sx={{
         color: textColor,
+        whiteSpace: "pre-wrap",
+        wordBreak: "break-word",
+        overflowWrap: "anywhere",
       }}
     >
       {text}
