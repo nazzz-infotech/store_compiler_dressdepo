@@ -129,11 +129,12 @@ function Circle({
       dropShadowOffsetY,
     )} ${toRem(dropShadowBlurRadius)} ${dropShadowColor})`,
 
-    borderRadius: Number(borderRadius) > 0 ? toRem(borderRadius) : "50%",
+    borderRadius: Number(borderRadius) > 0 ? toRem(borderRadius) : "100%",
     zIndex: Number(zIndex) + 10,
     flexWrap: flexWrap === "true" ? "wrap" : "unset",
-    flexGrow : flexGrow,
+    flexGrow: flexGrow,
     rotate: `${rotate}deg`,
+    overflow: "hidden",
   };
 
   return (
@@ -153,7 +154,10 @@ function Circle({
           </Ribbon>
         </div>
       )}
-      <div className="relative z-10 circle flex flex-col items-center justify-center" style={style}>
+      <div
+        className="relative z-10 flex flex-col items-center justify-center"
+        style={style}
+      >
         {imageUrl && (
           <img
             src={imageUrl}

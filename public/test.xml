@@ -12,6 +12,8 @@
         ribbonType="corner"
         ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false"
     >
+
+    <circle size="32" backgroundColor="#000000" />
         <!-- Eager -->
 
         <image
