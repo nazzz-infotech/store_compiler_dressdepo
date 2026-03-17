@@ -148,7 +148,7 @@ function Image({
         </div>
       )}
       <img
-        className="relative z-10 circle flex flex-col items-center justify-center inset-0 w-full h-full"
+        className="relative z-10 circle flex flex-col items-center justify-center inset-0"
         style={style}
         src={imageUrl}
         alt={imageText}
