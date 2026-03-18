@@ -1,51 +1,35 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<store xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<store>
     <banner
         image="https://storage.googleapis.com/dressdepo_storage_bucket/sellers/assets/default/default_store_banner.png"
-        title="Hi, 3z Fashions"
-        subtitle="here's is your new store, let it customize !"
-    />
-    <text text="Hello World" />
-    <responsive_grid gap="5" xsCols="1" smCols="1" mdCols="2" lgCols="4" xlCols="4" xxlCols="6"
-        backgroundColor="#eceff1" padding="5" borderRadius="0.5" borderSize="2.5"
-        borderType="ridge" borderColor="#1a237e" ribbon="true" ribbonText="2@1999₹"
-        ribbonType="corner"
-        ribbonColor="#2e7d32" ribbonTextColor="#ffffff" flexWrap="false"
-    >
-
-    <circle size="32" backgroundColor="#000000" />
-        <!-- Eager -->
-
+        title="Welcome" subtitle="Welcome to our store !" />
+    <octagon />
+    <column gap="3" padding="2">
+        <row gap="0" padding="1" backgroundColor="#f9e1e1" ribbon="false" ribbonColor="#af5555"
+            ribbonType="edge" ribbonText="Nice !" dropShadowOffsetX="0" dropShadowOffsetY="0"
+            dropShadowBlurRadius="0" justifyContent="left" boxShadowHorizontalOffset="1"
+            boxShadowVerticalOffset="1" boxShadowBlurRadius="1" boxShadowSpreadRadius="0"
+            borderRadius="1">
+            <text text="Hello !" type="h3" textColor="text.primary" />
+            <product_card_open />
+            <product_card id="6963c7cf4235e3deed3ab7a2" />
+        </row>
+        <circle size="64" backgroundColor="#ceabab"
+            imageUrl="https://storage.googleapis.com/dressdepo_storage_bucket/sellers/assets/46bc0bb9-18fe-4f3c-812b-7b6289757d82/image_1773502998875.jpg"
+            imageText="Candy Image" />
+        <heart size="64" imageText="Candy Image" />
+        <starburst size="64" spikes="14" rotate="10" />
+        <triangle size="40" />
+        <rhombus size="40" />
+        <octagon size="40" />
+        <hexagon size="47" type="2" />
+        <lollipop size="40" firstColor="#fd99d7" secondColor="#4b5faf" />
+        <zigzag_box width="90" height="72">
+            <text text="ZigZag Box" type="h3" textColor="#ffffff" />
+        </zigzag_box>
         <image
-            imageUrl="https://picsum.photos/512/522"
-            loading="eager" height="512" width="512" />
-        <image
-            imageUrl="https://picsum.photos/512/523"
-            loading="eager" height="512" width="512" />
-        <image
-            imageUrl="https://picsum.photos/512/524"
-            loading="eager" height="512" width="512" />
-        <image
-            imageUrl="https://picsum.photos/512/555"
-            loading="eager" height="512" width="512" />
-
-        <!-- Lazy -->
-
-
-        <image
-            imageUrl="https://picsum.photos/512/500"
-            loading="lazy" height="512" width="512" />
-        <image
-            imageUrl="https://picsum.photos/512/501"
-            loading="lazy" height="512" width="512" />
-        <image
-            imageUrl="https://picsum.photos/512/511"
-            loading="lazy" height="512" width="512" />
-        <image
-            imageUrl="https://picsum.photos/512/509"
-            loading="lazy" height="512" width="512" />
-
-
-        <product_card id="6963c7cf4235e3deed3ab7a0" />
-    </responsive_grid>
+            imageUrl="https://storage.googleapis.com/dressdepo_storage_bucket/sellers/assets/46bc0bb9-18fe-4f3c-812b-7b6289757d82/image_1773721859697.jpg"
+            imageText="Hello it is green grass" loading="eager" borderSize="0" height="158"
+            width="356" />
+    </column>
+    <product_card_open />
 </store>

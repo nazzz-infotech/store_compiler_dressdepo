@@ -155,7 +155,7 @@ function Row({
         </div>
       )}
 
-      <div className="flex flex-row relative z-10 justify-center" style={style}>
+      <div className="flex flex-row relative z-10" style={style}>
         {!disableChildren && children}
       </div>
     </div>

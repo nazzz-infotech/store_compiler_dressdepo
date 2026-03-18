@@ -20,18 +20,12 @@ import { AddShoppingCart } from "@mui/icons-material";
 import { Ribbon } from "react-ribbons";
 import { useEffect, useState } from "react";
 
-export interface RowDoc extends GenericStyleDoc {
-  gap?: number | string;
-  disableChildren?: boolean;
-}
-
-interface Props extends RowDoc {
+interface Props extends GenericStyleDoc {
   id: string;
 }
 
 function ProductCard({
   id,
-  gap = 0,
   padding = 0,
   paddingBottom = 0,
   paddingLeft = 0,
@@ -111,7 +105,6 @@ function ProductCard({
   if (marginLeft === 0) marginLeft = margin;
 
   const style: React.CSSProperties = {
-    gap: toRem(gap),
     padding: toRem(padding),
     paddingBottom: toRem(paddingBottom),
     paddingLeft: toRem(paddingLeft),
@@ -166,7 +159,7 @@ function ProductCard({
   };
 
   return (
-    <div className="flex! relative! items-center! justify-center! rounded-sm! w-full!" style={style}>
+    <div className="flex! relative! items-center! justify-center! rounded-sm!" style={style}>
       <Box sx={{ position: "absolute", top: 0, left: 0, zIndex: 10, ml: 0.3 }}>
         {data.tagLine !== "EMT" ? (
           <Ribbon
