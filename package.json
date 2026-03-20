@@ -63,5 +63,6 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist"
-  ]
+  ],
+  "license": "MIT"
 }
