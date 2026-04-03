@@ -30,6 +30,23 @@ export default function apiUrl() {
   return "https://storage.googleapis.com/dressdepo_storage_bucket";
 }
 
+
+/**
+ * @param mrp 
+ * @param selling 
+ * @returns discount percentage
+ */
+export function getDiscountPercent(mrp: number, selling: number): number {
+  if (mrp === 0) return 0;
+  return Math.round(((mrp - selling) / mrp) * 100);
+}
+
+/**
+ * @deprecated
+ * @param price 
+ * @param discountPercent 
+ * @returns 
+ */
 export function applyDiscount(price: number, discountPercent: number) {
   const discounted = price - (price * discountPercent) / 100;
   return Math.floor(discounted); // round to nearest whole number
@@ -181,7 +198,7 @@ export type ProductType = {
     other3: string;
   };
   sizes: string[];
-  price: { mrp: number; discount: number };
+  price: { mrp: number; selling_price: number };
   article: string;
   fabric: string;
   pattern: string;

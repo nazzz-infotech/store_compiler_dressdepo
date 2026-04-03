@@ -1,7 +1,7 @@
 import apiUrl, {
-  applyDiscount,
   fetchProduct,
   type GenericStyleDoc,
+  getDiscountPercent,
   type ProductType,
   toRem,
 } from "../api/api";
@@ -159,7 +159,10 @@ function ProductCard({
   };
 
   return (
-    <div className="flex! relative! items-center! justify-center! rounded-sm!" style={style}>
+    <div
+      className="flex! relative! items-center! justify-center! rounded-sm!"
+      style={style}
+    >
       <Box sx={{ position: "absolute", top: 0, left: 0, zIndex: 10, ml: 0.3 }}>
         {data.tagLine !== "EMT" ? (
           <Ribbon
@@ -205,13 +208,15 @@ function ProductCard({
               </Typography>
               <div className="flex flex-row gap-1.5 items-center flex-wrap">
                 <Typography variant="body1" fontSize={17}>
-                  <b>₹{applyDiscount(data.price.mrp, data.price.discount)}</b>
+                  <b>₹{data.price.selling_price}</b>
                 </Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   <s>₹{data.price.mrp}</s>
                 </Typography>
                 <Typography variant="body2" color="primary">
-                  ({data.price.discount}% Off)
+                  (
+                  {getDiscountPercent(data.price.mrp, data.price.selling_price)}
+                  % Off)
                 </Typography>
               </div>
               <Typography
