@@ -1,7 +1,7 @@
 {
   "name": "store-compiler-dressdepo",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "main": "dist/dressdepo-store-renderer.js",
   "module": "dist/dressdepo-store-renderer.js",
