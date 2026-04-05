@@ -16,22 +16,22 @@ export function Banner({
   children,
 }: BannerDoc & { children?: ReactNode }) {
   return (
-    <div className="relative h-72 w-full">
+    <div className="dsc:relative dsc:h-72 dsc:w-full">
       <img
         src={image}
         alt={"Banner Image"}
-        className="w-full h-full object-cover"
+        className="dsc:w-full dsc:h-full dsc:object-cover"
         loading="eager"
       />
       <Typography
         variant="h4"
-        className="absolute bottom-9.5 left-4 text-white drop-shadow-sm drop-shadow-black font-bold"
+        className="dsc:absolute dsc:bottom-9.5 dsc:left-4 dsc:text-white dsc:drop-shadow-sm dsc:drop-shadow-black dsc:font-bold"
       >
         {title}
       </Typography>
       <Typography
         variant="body1"
-        className="absolute bottom-3.25 left-4 text-white! drop-shadow-sm drop-shadow-black"
+        className="dsc:absolute dsc:bottom-3.25 dsc:left-4 dsc:text-white! dsc:drop-shadow-sm dsc:drop-shadow-black"
       >
         {subtitle}
       </Typography>
@@ -39,3 +39,4 @@ export function Banner({
     </div>
   );
 }
+

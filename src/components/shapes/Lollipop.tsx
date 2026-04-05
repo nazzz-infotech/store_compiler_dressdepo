@@ -141,9 +141,9 @@ function Lollipop({
   };
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -157,11 +157,12 @@ function Lollipop({
           </Ribbon>
         </div>
       )}
-      <div className={`relative z-10 lollipop`} style={style}>
-        {!disableChildren && <div className="relative z-10">{children}</div>}
+      <div className="dsc:relative dsc:z-10 lollipop" style={style}>
+        {!disableChildren && <div className="dsc:relative dsc:z-10">{children}</div>}
       </div>
     </div>
   );
 }
 
 export default Lollipop;
+

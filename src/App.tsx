@@ -12,10 +12,11 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="dsc:flex dsc:flex-col dsc:gap-6 dsc:p-6">
       <StoreRenderer xml={xml} />
     </div>
   );
 }
 
 export default App;
+

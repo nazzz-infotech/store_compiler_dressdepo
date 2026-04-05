@@ -33,3 +33,4 @@ export function compileNode(node: LayoutNode): JSX.Element {
   // if we reach here the node type wasn't in the registry (shouldn't happen)
   throw new Error(`no component registered for type "${node.type}"`);
 }
+

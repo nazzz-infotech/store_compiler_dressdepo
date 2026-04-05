@@ -160,7 +160,7 @@ function ProductCard({
 
   return (
     <div
-      className="flex! relative! items-center! justify-center! rounded-sm!"
+      className="dsc:flex! dsc:relative! dsc:items-center! dsc:justify-center! dsc:rounded-sm!"
       style={style}
     >
       <Box sx={{ position: "absolute", top: 0, left: 0, zIndex: 10, ml: 0.3 }}>
@@ -198,7 +198,7 @@ function ProductCard({
                 alt="Product image"
                 height={350}
                 width={200}
-                className="block!"
+                className="dsc:block!"
               />
             </CardMedia>
             <Divider />
@@ -206,7 +206,7 @@ function ProductCard({
               <Typography variant="body1" fontSize={17.5}>
                 {data.brand}
               </Typography>
-              <div className="flex flex-row gap-1.5 items-center flex-wrap">
+              <div className="dsc:flex dsc:flex-row dsc:gap-1.5 dsc:items-center dsc:flex-wrap">
                 <Typography variant="body1" fontSize={17}>
                   <b>₹{data.price.selling_price}</b>
                 </Typography>
@@ -222,7 +222,7 @@ function ProductCard({
               <Typography
                 variant="body2"
                 sx={{ color: "text.secondary" }}
-                className="mt-0.75!"
+                className="dsc:mt-0.75!"
                 fontSize={12.5}
               >
                 {data.title}
@@ -231,7 +231,7 @@ function ProductCard({
           </CardActionArea>
         </a>
         <Divider />
-        <CardActions className="justify-center flex">
+        <CardActions className="dsc:justify-center dsc:flex">
           <Button
             variant="contained"
             LinkComponent={"a"}
@@ -250,3 +250,4 @@ function ProductCard({
 }
 
 export default ProductCard;
+

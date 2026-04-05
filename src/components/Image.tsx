@@ -131,9 +131,9 @@ function Image({
   };
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -148,7 +148,7 @@ function Image({
         </div>
       )}
       <img
-        className="relative z-10 circle flex flex-col items-center justify-center inset-0"
+        className="dsc:relative dsc:z-10 dsc:circle dsc:flex dsc:flex-col dsc:items-center dsc:justify-center dsc:inset-0"
         style={style}
         src={imageUrl}
         alt={imageText}
@@ -161,3 +161,4 @@ function Image({
 }
 
 export default Image;
+

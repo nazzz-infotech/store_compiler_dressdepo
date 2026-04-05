@@ -81,3 +81,4 @@ export function StoreRenderer({ xml }: Props) {
     </>
   );
 }
+

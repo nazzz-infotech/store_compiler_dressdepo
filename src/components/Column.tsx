@@ -137,9 +137,9 @@ function Column({
   };
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -154,7 +154,7 @@ function Column({
         </div>
       )}
 
-      <div className="flex flex-col relative z-10" style={style}>
+      <div className="dsc:flex dsc:flex-col dsc:relative dsc:z-10" style={style}>
         {!disableChildren && children}
       </div>
     </div>
@@ -162,3 +162,4 @@ function Column({
 }
 
 export default Column;
+

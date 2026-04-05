@@ -153,9 +153,9 @@ function ZigzagLine({
   };
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -170,21 +170,22 @@ function ZigzagLine({
         </div>
       )}
       <div
-        className="relative z-10 zigzag_line flex flex-col items-center justify-center"
+        className="dsc:relative dsc:z-10 zigzag_line dsc:flex dsc:flex-col dsc:items-center dsc:justify-center"
         style={style}
       >
         {imageUrl && (
           <img
             src={imageUrl}
             alt={imageText}
-            className="absolute inset-0 w-full h-full"
+            className="dsc:absolute dsc:inset-0 dsc:w-full dsc:h-full"
             style={{ objectFit: "cover" }}
           />
         )}
-        {!disableChildren && <div className="relative z-10">{children}</div>}
+        {!disableChildren && <div className="dsc:relative dsc:z-10">{children}</div>}
       </div>
     </div>
   );
 }
 
 export default ZigzagLine;
+

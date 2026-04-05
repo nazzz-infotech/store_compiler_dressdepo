@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Ribbon } from "react-ribbons";
 import { toRem, type GenericStyleDoc } from "../../api/api";
-import "./ShapesSheet.css";
 
 interface StarBurstDoc extends GenericStyleDoc {
   disableChildren?: boolean;
@@ -168,9 +167,9 @@ function StarBurst({
   };
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -184,19 +183,20 @@ function StarBurst({
           </Ribbon>
         </div>
       )}
-      <div className="relative z-10 flex flex-col items-center justify-center" style={style}>
+      <div className="dsc:relative dsc:z-10 dsc:flex dsc:flex-col dsc:items-center dsc:justify-center" style={style}>
         {imageUrl && (
           <img
-            className="absolute inset-0 w-full h-full"
+            className="dsc:absolute dsc:inset-0 dsc:w-full dsc:h-full"
             alt={imageText}
             src={imageUrl}
             style={{ objectFit: "cover" }}
           />
         )}
-        {!disableChildren && <div className="relative z-10">{children}</div>}
+        {!disableChildren && <div className="dsc:relative dsc:z-10">{children}</div>}
       </div>
     </div>
   );
 }
 
 export default StarBurst;
+

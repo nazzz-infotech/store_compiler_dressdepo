@@ -142,7 +142,7 @@ function Hexagon({
 
   if (type > 2 || type < 1) {
     return (
-      <div className="flex flex-col items-center justify-center h-full p-3 rounded-sm bg-red-100 m-2 border border-gray-300">
+      <div className="dsc:flex dsc:flex-col dsc:items-center dsc:justify-center dsc:h-full dsc:p-3 dsc:rounded-sm dsc:bg-red-100 dsc:m-2 dsc:border dsc:border-gray-300">
         <Typography variant="body1" color="error">
           Error : <b>Hexagon type must be 1 or 2 !</b>
         </Typography>
@@ -151,9 +151,9 @@ function Hexagon({
   }
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -167,19 +167,20 @@ function Hexagon({
           </Ribbon>
         </div>
       )}
-      <div className={`relative z-10 hexagon_${type} flex flex-col items-center justify-center`} style={style}>
+      <div className={`dsc:relative dsc:z-10 hexagon_${type} dsc:flex dsc:flex-col dsc:items-center dsc:justify-center`} style={style}>
         {imageUrl && (
           <img
-            className="absolute inset-0 w-full h-full"
+            className="dsc:absolute dsc:inset-0 dsc:w-full dsc:h-full"
             alt={imageText}
             src={imageUrl}
             style={{ objectFit: "cover" }}
           />
         )}
-        {!disableChildren && <div className="relative z-10">{children}</div>}
+        {!disableChildren && <div className="dsc:relative dsc:z-10">{children}</div>}
       </div>
     </div>
   );
 }
 
 export default Hexagon;
+

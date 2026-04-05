@@ -138,9 +138,9 @@ function Row({
   };
 
   return (
-    <div className="relative">
+    <div className="dsc:relative">
       {ribbon && (
-        <div className="absolute top-0 left-0 z-50">
+        <div className="dsc:absolute dsc:top-0 dsc:left-0 dsc:z-50">
           <Ribbon
             side={ribbonSide}
             type={ribbonType}
@@ -155,7 +155,7 @@ function Row({
         </div>
       )}
 
-      <div className="flex flex-row relative z-10" style={style}>
+      <div className="dsc:flex dsc:flex-row dsc:relative dsc:z-10" style={style}>
         {!disableChildren && children}
       </div>
     </div>
@@ -163,3 +163,4 @@ function Row({
 }
 
 export default Row;
+
