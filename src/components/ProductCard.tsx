@@ -13,6 +13,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  CircularProgress,
   Divider,
   Typography,
 } from "@mui/material";
@@ -77,13 +78,21 @@ function ProductCard({
   rotate = 0,
 }: Props) {
   const hasMainBorder = Number(borderSize) > 0;
-  const [data, setData] = useState<ProductType | null>();
+  const [data, setData] = useState<ProductType | null | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     async function load() {
+      setLoading(true);
       const response = await fetchProduct(id);
-      console.log(response);
+      if (response === undefined) {
+        setLoading(false);
+        setError(true);
+        return;
+      }
       setData(response);
+      setLoading(false);
     }
     load();
   }, [id]);
@@ -157,6 +166,27 @@ function ProductCard({
     flexGrow: flexGrow,
     rotate: `${rotate}deg`,
   };
+
+  if (error) {
+    return (
+      <div className="dsc:flex! dsc:relative! dsc:items-center! dsc:justify-center! dsc:rounded-sm! dsc:h-full!">
+        <Typography variant="body1" color="error">
+          Unable to load product.
+        </Typography>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="dsc:flex! dsc:relative! dsc:items-center! dsc:justify-center! dsc:rounded-sm! dsc:h-full! dsc:gap-1.5!">
+        <CircularProgress />
+        <Typography variant="caption" color="textSecondary">
+          Loading product ...
+        </Typography>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -250,4 +280,3 @@ function ProductCard({
 }
 
 export default ProductCard;
-

@@ -223,11 +223,11 @@ export async function fetchProduct(id: string): Promise<ProductType | undefined>
   );
   if (response.status === 404) {
     alert("Product not found");
-    return;
+    return undefined;
   }
   if (response.status === 400) {
     alert("id not found");
-    return;
+    return undefined;
   }
   const json = await response.json();
   return json.data;
