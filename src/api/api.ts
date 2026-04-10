@@ -30,10 +30,9 @@ export default function apiUrl() {
   return "https://storage.googleapis.com/dressdepo_storage_bucket";
 }
 
-
 /**
- * @param mrp 
- * @param selling 
+ * @param mrp
+ * @param selling
  * @returns discount percentage
  */
 export function getDiscountPercent(mrp: number, selling: number): number {
@@ -43,9 +42,9 @@ export function getDiscountPercent(mrp: number, selling: number): number {
 
 /**
  * @deprecated
- * @param price 
- * @param discountPercent 
- * @returns 
+ * @param price
+ * @param discountPercent
+ * @returns
  */
 export function applyDiscount(price: number, discountPercent: number) {
   const discounted = price - (price * discountPercent) / 100;
@@ -217,16 +216,16 @@ export type ProductType = {
   seller_id: string;
 };
 
-export async function fetchProduct(id: string): Promise<ProductType | undefined> {
-  const response = await fetch(
-    `/api/get-item?id=${id}`,
-  );
+export async function fetchProduct(
+  id: string,
+): Promise<ProductType | undefined> {
+  const response = await fetch(`/api/get-item?id=${id}`);
   if (response.status === 404) {
-    alert("Product not found");
+    console.error("Product not found");
     return undefined;
   }
   if (response.status === 400) {
-    alert("id not found");
+    console.error("Id not found");
     return undefined;
   }
   const json = await response.json();

@@ -98,7 +98,7 @@ function ProductCard({
   }, [id]);
 
   if (!data || data === null) {
-    return <h4>Data is null for product card !</h4>;
+    return <Typography>Product not found</Typography>;
   }
 
   /* Fix padding */
