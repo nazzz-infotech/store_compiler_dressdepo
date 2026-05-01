@@ -85,21 +85,25 @@ function ProductCard({
   useEffect(() => {
     async function load() {
       setLoading(true);
-      const response = await fetchProduct(id);
-      if (response === undefined) {
-        setLoading(false);
+      setError(false);
+      setData(undefined);
+      try {
+        const response = await fetchProduct(id);
+        if (response === undefined || response === null) {
+          setData(null);
+          setError(true);
+          return;
+        }
+        setData(response);
+      } catch {
+        setData(null);
         setError(true);
-        return;
+      } finally {
+        setLoading(false);
       }
-      setData(response);
-      setLoading(false);
     }
     load();
   }, [id]);
-
-  if (!data || data === null) {
-    return <Typography>Product not found</Typography>;
-  }
 
   /* Fix padding */
   if (paddingTop === 0) paddingTop = padding;
@@ -167,6 +171,17 @@ function ProductCard({
     rotate: `${rotate}deg`,
   };
 
+  if (loading) {
+    return (
+      <div className="dsc:flex! dsc:flex-col! dsc:relative! dsc:items-center! dsc:justify-center! dsc:rounded-sm! dsc:h-full! dsc:gap-1.5!">
+        <CircularProgress />
+        <Typography variant="caption" color="textSecondary">
+          Loading product ...
+        </Typography>
+      </div>
+    );
+  }
+
   if (error) {
     return (
       <div className="dsc:flex! dsc:relative! dsc:items-center! dsc:justify-center! dsc:rounded-sm! dsc:h-full!">
@@ -177,15 +192,8 @@ function ProductCard({
     );
   }
 
-  if (loading) {
-    return (
-      <div className="dsc:flex! dsc:relative! dsc:items-center! dsc:justify-center! dsc:rounded-sm! dsc:h-full! dsc:gap-1.5!">
-        <CircularProgress />
-        <Typography variant="caption" color="textSecondary">
-          Loading product ...
-        </Typography>
-      </div>
-    );
+  if (!data) {
+    return <Typography>Product not found</Typography>;
   }
 
   return (
