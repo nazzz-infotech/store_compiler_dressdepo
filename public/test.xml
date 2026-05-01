@@ -1,7 +1,7 @@
 <store>
     <banner
         image="https://storage.googleapis.com/dressdepo_storage_bucket/sellers/assets/default/default_store_banner.png"
-        title="Welcome" subtitle="Welcome to our store !" />
+        title="Welcome" subtitle="Welcome to our store !" backdropColor="#000000" backdropOpacity="0.15" />
     <octagon />
     <column gap="3" padding="2">
         <row gap="0" padding="1" backgroundColor="#f9e1e1" ribbon="false" ribbonColor="#af5555"

@@ -1,11 +1,14 @@
 import type { ReactNode } from "react";
 import { Typography } from "@mui/material";
+import { hexToRgba } from "../api/api";
 
 export interface BannerDoc {
   image: string;
   title: string;
   subtitle?: string;
   disableChildren?: boolean;
+  backdropColor: string;
+  backdropOpacity: string | number;
 }
 
 export function Banner({
@@ -14,6 +17,8 @@ export function Banner({
   subtitle,
   disableChildren = false,
   children,
+  backdropColor,
+  backdropOpacity,
 }: BannerDoc & { children?: ReactNode }) {
   return (
     <div className="dsc:relative dsc:h-72 dsc:w-full">
@@ -22,6 +27,12 @@ export function Banner({
         alt={"Banner Image"}
         className="dsc:w-full dsc:h-full dsc:object-cover"
         loading="eager"
+      />
+      <div
+        className="dsc:absolute dsc:top-0 dsc:left-0 dsc:w-full dsc:h-full"
+        style={{
+          backgroundColor: hexToRgba(backdropColor, Number(backdropOpacity)),
+        }}
       />
       <Typography
         variant="h4"
@@ -39,4 +50,3 @@ export function Banner({
     </div>
   );
 }
-
